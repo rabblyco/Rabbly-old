@@ -1,0 +1,41 @@
+version: '3.4'
+
+services:
+  database:
+    image: postgres:10-alpine
+    container_name: rabbly-db
+    environment:
+      POSTGRES_PASSWORD: password1234
+      POSTGRES_USER: rabbly
+      POSTGRES_DB: rabbly
+    ports:
+      - 5432:5432
+
+  api:
+    image: rabbly-api
+    container_name: rabbly-api
+    depends_on: 
+      - database
+    build:
+      context: ./Api/Rabbly
+      dockerfile: Dockerfile.dev
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - 5000:5000
+    volumes:
+      - ./Api/Rabbly:/app
+
+  client:
+    image: rabbly-client
+    environment:
+      NODE_ENV: development
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./Client
+    ports:
+      - 4200:4200
+      - 49153:49153
+    volumes:
+      - /usr/src/app/node_modules
+      - ./Client:/usr/src/app
