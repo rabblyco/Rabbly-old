@@ -54,7 +54,7 @@ namespace RabblyApi.Controllers
             var token = GenerateToken(user);
 
             var loginResult = new LoginResponseDto();
-            loginResult.Token = token;
+            loginResult.Token = new JwtSecurityTokenHandler().WriteToken(token);
             loginResult.User = user;
 
             return Ok(loginResult);

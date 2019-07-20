@@ -75,7 +75,7 @@ namespace RabblyApi.Tests.IntegrationTests.Controllers
             login.Password = "password1234";
             var response = await _client.PostAsJsonAsync("/auth/login", login);
             var responseString = await response.Content.ReadAsStringAsync();
-            var loginResponse = JObject.Parse(responseString).ToObject<LoginResponseDto>();
+            var loginResponse = JsonConvert.DeserializeObject<LoginResponseDto>(responseString);
             return loginResponse;
         }
 
@@ -95,7 +95,7 @@ namespace RabblyApi.Tests.IntegrationTests.Controllers
             Console.WriteLine($"User was created: {created}");
             var loginResponse = await GetDefaultUser();
             Console.WriteLine($"response: {loginResponse}");
-            var authorizationHeaders = new AuthenticationHeaderValue("Bearer", loginResponse.Token?.ToString() ?? "");
+            var authorizationHeaders = new AuthenticationHeaderValue("Bearer", loginResponse.Token ?? "");
             _client.DefaultRequestHeaders.Authorization = authorizationHeaders;
 
             // Act

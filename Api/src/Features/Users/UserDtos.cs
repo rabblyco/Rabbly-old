@@ -39,7 +39,7 @@ namespace RabblyApi.Users.Dtos
     public class LoginResponseDto
     {
         public User User { get; set; }
-        public JwtSecurityToken Token {get; set; }
+        public string Token { get; set; }
 
     }
 }
