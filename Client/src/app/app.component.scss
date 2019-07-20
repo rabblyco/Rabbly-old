@@ -1,0 +1,32 @@
+.mat-drawer-container {
+    position: fixed;
+    top: 56px;
+    height: calc(100vh - 56px);
+    width: 100%;
+
+    .mat-sidenav {
+        width: 244px;
+        background-color: #6135ce;
+    }
+
+    .mat-drawer-content {
+        padding: 22px 0 0 22px;
+        .toggler {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 18px;
+            height: 18px;
+            font-size: 18px !important;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 8px 3px rgba(#bcbcbc, .88);
+        }
+
+        .main {
+            padding: 0 16px 16px 0;
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

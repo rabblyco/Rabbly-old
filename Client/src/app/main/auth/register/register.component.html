@@ -1,0 +1,31 @@
+<div class="form-container">
+    <form [formGroup]="registerForm" (ngSubmit)="submit($event)">
+      <fieldset>
+        <label>Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          [ngClass]="{ invalid: form.email.dirty && !form.email.valid }"
+        />
+      </fieldset>
+      <fieldset>
+        <label>Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          [ngClass]="{ invalid: form.password.dirty && !form.password.valid }"
+        />
+      </fieldset>
+      <fieldset>
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          formControlName="confirmPassword"
+          [ngClass]="{ invalid: form.confirmPassword.dirty && !form.confirmPassword.valid }"
+        />
+      </fieldset>
+      <button type="submit">Submit</button>
+    </form>
+    <button routerLink="/auth/login">Login instead</button>
+  </div>
+  

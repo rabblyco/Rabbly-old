@@ -1,0 +1,20 @@
+.side-nav {
+    padding: 0 16px 16px 16px;
+    color: white;
+
+    .section {
+        & > *,
+        & > * > * {
+            padding: 4px 0;
+            max-width: 212px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            word-break: break-all;
+        }
+        .inner {
+            padding-left: 16px;
+            max-width: 196px;
+        }
+    }
+}

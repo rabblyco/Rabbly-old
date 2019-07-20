@@ -1,0 +1,14 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+
+    form {
+        label {
+            display: block;
+        }
+
+        .invalid {
+            border-color: red;
+        }
+    }
+}
