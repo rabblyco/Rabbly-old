@@ -14,12 +14,12 @@ namespace RabblyApi.Profiles.Models
         public string Username { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public Gender Gender { get; set; }
+        public Gender? Gender { get; set; }
         public string ImageUrl { get; set; }
         public string Ideology { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public Countries Country { get; set; }
+        public Countries? Country { get; set; }
         
         [JsonConverter(typeof(StringEnumConverter))]
         public States? State { get; set; }

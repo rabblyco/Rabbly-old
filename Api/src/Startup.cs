@@ -14,6 +14,7 @@ using RabblyApi.Debates.Services;
 using RabblyApi.Groups.Services;
 using RabblyApi.Profiles.Services;
 using RabblyApi.Users.Services;
+using Newtonsoft.Json;
 
 namespace RabblyApi.Api
 {
@@ -50,14 +51,22 @@ namespace RabblyApi.Api
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
             })
+            .AddGoogle("google", opt =>
+            {
+                opt.ClientId = "340114918710-6pebk36f1gccbri0fke24hqold2h058d.apps.googleusercontent.com";
+                opt.ClientSecret = "UZsrHyn2SKUQX-BfNWyxXUmG";
+            })
             .AddJwtBearer(opt =>
             {
                 opt.TokenValidationParameters = new TokenValidationParameters()
                 {
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Keys:TokenSecret"])),
-                    RequireSignedTokens = true,
-                    ValidIssuer = Configuration["Credentials:Issuer"],
-                    ValidAudience = Configuration["Credentials:Audience"],
+                    RequireSignedTokens = false,
+                    ValidIssuers = new string[] {
+                        Configuration["Credentials:Issuer"],
+                        "accounts.google.com"
+                    },
+                    ValidateAudience = false,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                 };

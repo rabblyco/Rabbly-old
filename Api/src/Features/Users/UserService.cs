@@ -75,6 +75,9 @@ namespace RabblyApi.Users.Services
 
         public async Task<bool> Register(string email)
         {
+            var userExists = await _context.Users.AnyAsync(u => u.Email == email);
+            if (userExists) return false;
+
             User newUser = new User();
             newUser.Email = email;
             var profile = new Profile();
@@ -89,7 +92,7 @@ namespace RabblyApi.Users.Services
             }
             catch (Exception ex)
             {
-                Console.Write(ex);
+                Console.Write("THIS IS MY SERMON: ", ex);
                 return false;
             }
 

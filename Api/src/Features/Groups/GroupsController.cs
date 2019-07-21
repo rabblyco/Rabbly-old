@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RabblyApi.Groups.Dtos;
 using RabblyApi.Groups.Services;
@@ -6,6 +7,7 @@ using RabblyApi.Groups.Services;
 namespace RabblyApi.Groups.Controllers
 {
     [Route("group")]
+    [Authorize]
     public class GroupController : Controller
     {
         private readonly GroupService _groupService;

@@ -9,6 +9,7 @@ namespace RabblyApi.Profiles.Controllers
 {
     [Route("profile")]
     [Produces("application/json")]
+    [Authorize]
     public class ProfilesController : Controller
     {
         private readonly ProfileService _profileService;

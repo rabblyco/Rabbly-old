@@ -27,11 +27,11 @@ namespace RabblyApi.Data
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.EnableSensitiveDataLogging();
-            if (optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseNpgsql(_config.GetConnectionString("Default"));
-            }
+            // optionsBuilder.EnableSensitiveDataLogging();
+            // if (optionsBuilder.IsConfigured)
+            // {
+            //     optionsBuilder.UseNpgsql(_config.GetConnectionString("Default"));
+            // }
         }
 
         public DbSet<User> Users { get; set; }

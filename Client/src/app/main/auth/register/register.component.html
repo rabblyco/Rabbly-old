@@ -9,6 +9,14 @@
         />
       </fieldset>
       <fieldset>
+        <label>Username</label>
+        <input
+          type="text"
+          formControlName="username"
+          [ngClass]="{ invalid: form.username.dirty && !form.username.valid }"
+        />
+      </fieldset>
+      <fieldset>
         <label>Password</label>
         <input
           type="password"

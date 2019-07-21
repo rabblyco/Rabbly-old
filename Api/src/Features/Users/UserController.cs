@@ -35,6 +35,10 @@ namespace RabblyApi.Controllers
         public async Task<IActionResult> CheckLogin()
         {
             var email = HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Email).FirstOrDefault().Value;
+            if(email == null)
+            {
+                email = HttpContext.User.Claims.Where(c => c.Type == "email").FirstOrDefault().Value;
+            }
             var user = await _userService.GetUser(email);
             
             if(user == null) return BadRequest();
@@ -79,26 +83,33 @@ namespace RabblyApi.Controllers
         }
 
         [HttpPost("social")]
-        public async Task<ActionResult> ConfirmSocialLogin([FromBody] SocialLoginDto model)
+        public async Task<ActionResult<LoginResponseDto>> ConfirmSocialLogin([FromBody] SocialLoginDto model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var user = _userService.GetUser(model.Email);
-            bool created = false;
-            if(user == null)
+            var user = await _userService.GetUser(model.Email);
+
+            if (user != null)
             {
-                created = await _userService.Register(model.Email);
-            } 
-            else 
-            {
-                return Ok(new {
-                    msg = "lol"
-                });
+                var token = GenerateToken(user);
+                var loginResult = new LoginResponseDto();
+                loginResult.Token = new JwtSecurityTokenHandler().WriteToken(token);
+                loginResult.User = user;
+                return Ok(loginResult);
             }
-            if(!created)
+            else
             {
-                return BadRequest("Unable to add user");
+                bool created = await _userService.Register(model.Email);
+                if(!created)
+                {
+                    return BadRequest("Unable to create user");
+                }
+                user = await _userService.GetUser(model.Email);
+                var token = GenerateToken(user);
+                var loginResult = new LoginResponseDto();
+                loginResult.Token = new JwtSecurityTokenHandler().WriteToken(token);
+                loginResult.User = user;
+                return Created("/auth/social", loginResult);
             }
-            return Ok("Successfully added user");
         }
 
         private JwtSecurityToken GenerateToken(User user)

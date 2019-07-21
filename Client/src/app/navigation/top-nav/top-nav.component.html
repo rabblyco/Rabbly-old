@@ -1,7 +1,13 @@
 <div class="top-nav">
     <div class="right">
     </div>
-    <div class="left">
+    <div class="left" *ngIf="!authed; else notAuthed">
         <button routerLink="/auth/login">Login</button>
     </div>
+    <ng-template  #notAuthed>
+        <div class="left">
+            <button (click)="logout()">Logout</button>
+        </div>
+    </ng-template>
+
 </div>

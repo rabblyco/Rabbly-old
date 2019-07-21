@@ -452,13 +452,11 @@ namespace Api.Migrations
                         {
                             b1.Property<string>("UserId");
 
-                            b1.Property<string>("Country")
-                                .IsRequired();
+                            b1.Property<string>("Country");
 
                             b1.Property<decimal>("EconomicCoordinate");
 
-                            b1.Property<string>("Gender")
-                                .IsRequired();
+                            b1.Property<string>("Gender");
 
                             b1.Property<string>("Ideology");
 

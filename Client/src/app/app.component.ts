@@ -35,13 +35,15 @@ import { Observable, Subscription } from 'rxjs';
   ]
 })
 export class AppComponent implements OnInit, OnDestroy {
-  public opened: boolean = false;
+  public opened = false;
   public openingState: boolean = this.opened;
   public storeSubscription: Subscription;
-  public authed$: Observable<boolean>;
+  public authed: boolean;
 
   constructor(private store: Store<any>, private authService: AuthService) {
-    this.storeSubscription = store.pipe(select('auth')).subscribe(res => this.authed$ = res);
+    this.storeSubscription = store.pipe(select('auth')).subscribe(res => {
+      this.opened = this.authed = res;
+    });
   }
 
   ngOnInit() {
@@ -57,12 +59,12 @@ export class AppComponent implements OnInit, OnDestroy {
       this.store.dispatch(new UpdateGroup({ group: res.group, rank: res.rank }));
       return res;
     }).catch(err => {
-      this.store.dispatch(null);
+      return err;
     });
   }
 
   setState() {
-    if(this.authed$) {
+    if (this.authed) {
       this.openingState = !this.openingState;
     } else {
       this.opened = false;

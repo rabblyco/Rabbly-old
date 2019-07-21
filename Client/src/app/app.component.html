@@ -5,7 +5,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
       <!-- [ngStyle]="{ 'transform': opened ? 'rotate(0deg)' : 'rotate(180deg)' }" -->
-      <i class="material-icons toggler" (click)="sideNav.toggle()" [@openClose]="openingState ? 'opened' : 'closed'" [ngStyle]="{ 'display' : authed$ ? 'initial' : 'none' }">
+      <i class="material-icons toggler" (click)="sideNav.toggle()" [@openClose]="openingState ? 'opened' : 'closed'" [ngStyle]="{ 'display' : authed ? 'initial' : 'none' }">
         chevron_left
       </i>
       <div class="main">
