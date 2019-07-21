@@ -37,7 +37,9 @@ namespace RabblyApi.Api
             services.AddScoped<CommentService>();
             services.AddScoped<GroupService>();
 
-            services.AddDbContext<DatabaseContext>().BuildServiceProvider();
+            services.AddEntityFrameworkNpgsql()
+                .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("Default")))
+                .BuildServiceProvider();
 
             services.AddAutoMapper();
 

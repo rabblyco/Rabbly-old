@@ -1,8 +1,10 @@
+using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using RabblyApi.Data;
 using RabblyApi.Profiles.Dtos;
+using RabblyApi.Users.Models;
 
 namespace RabblyApi.Profiles.Services
 {
@@ -17,7 +19,17 @@ namespace RabblyApi.Profiles.Services
             _mapper = mapper;
         }
 
-        public async Task<RabblyApi.Profiles.Models.Profile> EditProfile(string id, ProfileEditDto editProfile)
+        public async Task<Models.Profile> GetProfile(string email)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            if(user?.Profile == null)
+            {
+                return null;
+            }
+            return user.Profile;
+        }
+
+        public async Task<Models.Profile> EditProfile(string id, ProfileEditDto editProfile)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
             if (user.Profile == null) return null;

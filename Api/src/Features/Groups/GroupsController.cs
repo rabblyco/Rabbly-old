@@ -16,12 +16,12 @@ namespace RabblyApi.Groups.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetGroup(string id)
+        public async Task<IActionResult> GetGroup([FromRoute] string id)
         {
             var group = await _groupService.GetGroup(id);
             if (group == null)
             {
-                return BadRequest();
+                return NotFound();
             }
             return Ok(group);
         }

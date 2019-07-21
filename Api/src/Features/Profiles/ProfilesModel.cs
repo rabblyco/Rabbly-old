@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using RabblyApi.Users.Models;
 using RabblyApi.Data.Utils;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RabblyApi.Profiles.Models
 {

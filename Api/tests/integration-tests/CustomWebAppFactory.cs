@@ -38,21 +38,8 @@ namespace RabblyApi.Tests.IntegrationTests
                     var scopedServices = scope.ServiceProvider;
                     var appDb = scopedServices.GetRequiredService<DatabaseContext>();
                     var logger = scopedServices.GetRequiredService<ILogger<CustomWebAppFactory<TStartup>>>();
-                    // Why does this make everything error out...?
-                    appDb.Database?.EnsureCreated();
 
-                    // try
-                    // {
-                    //     appDb.Database.Migrate();
-                    // }
-                    // catch(Exception ex)
-                    // {
-                    //     logger.LogError(ex, "Could not migrate DB");
-                    // }
-                    // finally
-                    // {
-                    //     logger.LogDebug("Made it here");
-                    // }
+                    appDb.Database?.EnsureCreated();
                 }
             });
         }

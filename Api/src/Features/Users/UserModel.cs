@@ -15,6 +15,8 @@ namespace RabblyApi.Users.Models
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+
+        [JsonIgnore]
         public string Password { get; set; }
         public Rank Rank { get; set; }
         public Profile Profile { get; set; }

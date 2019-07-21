@@ -56,6 +56,7 @@ namespace RabblyApi.Users.Services
             newUser.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(model.Password, 12);
             var profile = new Profile();
             profile.User = newUser;
+            profile.Username = newUser.Email.Split("@")[0];
             try
             {
                 // Ensure user is created first

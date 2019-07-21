@@ -35,6 +35,7 @@ namespace RabblyApi.Tests.IntegrationTests.Controllers
         {
             _client = factory.CreateClient();
             _context = factory.MyDbContext;
+            CreateDefaultUser().Wait();
         }
 
         private JwtSecurityToken GenerateToken(User user)
@@ -76,6 +77,7 @@ namespace RabblyApi.Tests.IntegrationTests.Controllers
             var response = await _client.PostAsJsonAsync("/auth/login", login);
             var responseString = await response.Content.ReadAsStringAsync();
             var loginResponse = JsonConvert.DeserializeObject<LoginResponseDto>(responseString);
+            Console.WriteLine($"login response: {loginResponse.User.Password}");
             return loginResponse;
         }
 
@@ -88,11 +90,16 @@ namespace RabblyApi.Tests.IntegrationTests.Controllers
         }
 
         [Fact]
-        public async Task UserController_ShouldReturnAuthorized_WithValidToken()
+        public async Task UserController_ShouldNot_ReturnHashedPassword()
+        {
+            var loginResponse = await GetDefaultUser();
+            Assert.Null(loginResponse.User.Password);
+        }
+
+        [Fact]
+        public async Task UserController_ShouldReturnOk_WithValidToken()
         {
             // Arrange
-            var created = await CreateDefaultUser();
-            Console.WriteLine($"User was created: {created}");
             var loginResponse = await GetDefaultUser();
             Console.WriteLine($"response: {loginResponse}");
             var authorizationHeaders = new AuthenticationHeaderValue("Bearer", loginResponse.Token ?? "");
@@ -103,6 +110,54 @@ namespace RabblyApi.Tests.IntegrationTests.Controllers
 
             // Assert
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task UserController_ShouldLogin_IfUserExists()
+        {
+            var login = new LoginRegisterDto();
+            login.Email = "dwdewul@gmail.com";
+            login.Password = "password1234";
+
+            var response = await _client.PostAsJsonAsync("/auth/login", login);
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task UserController_ShouldNotLogin_IfUserDoesNotExist()
+        {
+            var login = new LoginRegisterDto();
+            login.Email = "notregistered@gmail.com";
+            login.Password = "password1234";
+
+            var response = await _client.PostAsJsonAsync("/auth/login", login);
+
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task UserService_ShouldNotCreate_DuplicateUser()
+        {
+            var service = new UserService(_context);
+            var register = new LoginRegisterDto();
+            register.Email = "dwdewul@gmail.com";
+            register.Password = "password1234";
+            var userWasCreated = await service.Register(register);
+
+            Assert.Equal(false, userWasCreated);
+        }
+
+        [Fact]
+        public async Task UserService_ShouldCreate_NewUser()
+        {
+            var service = new UserService(_context);
+            var register = new LoginRegisterDto();
+            register.Email = "tester@gmail.com";
+            register.Password = "password1234";
+            var userWasCreated = await service.Register(register);
+
+            Assert.Equal(true, userWasCreated);
         }
     }
 }

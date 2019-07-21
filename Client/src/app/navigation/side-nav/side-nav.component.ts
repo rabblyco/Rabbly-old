@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Store, select } from "@ngrx/store";
-import { Subscription } from "rxjs";
-import { Group } from "../../models/group.model";
-import { Rank } from "../../models/rank.model";
-import { Profile } from "../../models/profile.model";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { Group } from '../../models/group.model';
+import { Rank } from '../../models/rank.model';
+import { Profile } from '../../models/profile.model';
 
 @Component({
-  selector: "app-side-nav",
-  templateUrl: "./side-nav.component.html",
-  styleUrls: ["./side-nav.component.scss"]
+  selector: 'app-side-nav',
+  templateUrl: './side-nav.component.html',
+  styleUrls: ['./side-nav.component.scss']
 })
 export class SideNavComponent implements OnInit, OnDestroy {
   public storeSubscription: Subscription;

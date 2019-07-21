@@ -20,7 +20,6 @@ namespace RabblyApi.Data
         private readonly IConfiguration _config;
         // private readonly IHostingEnvironment _env;
 
-        public DatabaseContext() { }
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
         public DatabaseContext(DbContextOptions<DatabaseContext> options, IConfiguration config) : base(options)
         {

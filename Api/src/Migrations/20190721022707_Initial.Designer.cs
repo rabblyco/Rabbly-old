@@ -10,7 +10,7 @@ using RabblyApi.Data;
 namespace Api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20190702170210_Initial")]
+    [Migration("20190721022707_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
