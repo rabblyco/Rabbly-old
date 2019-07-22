@@ -1,19 +1,19 @@
 <div class="side-nav">
+  <div class="section profile">
+    <!-- {{ profile | json }} -->
+    <div class="link-header title">
+      <a routerLink="/profile">{{ profile.username || "Add Username" }}</a>
+    </div>
+    <div class="inner" *ngIf="profile.ideology">Ideology: {{ profile.ideology }}</div>
+    <div class="inner">Social Position: {{ profile.socialCoordinate }}</div>
+    <div class="inner">Economic Position: {{ profile.economicCoordinate }}</div>
+  </div>
   <div class="section group" *ngIf="group">
     <div class="link-header title">
       <a routerLink="/group/{{ group.id }}">{{ group.name }}...</a>
     </div>
     <!-- Make this a link to view their permissions? -->
     <div class="inner">Rank: {{ rank.title }}</div>
-  </div>
-  <div class="section profile">
-    <!-- {{ profile | json }} -->
-    <div class="link-header title">
-      <a routerLink="/profile">{{ profile.username }}</a>
-    </div>
-    <div class="inner">Ideology: {{ profile.ideology }}</div>
-    <div class="inner">Social Position: {{ profile.socialCoordinate }}</div>
-    <div class="inner">Economic Position: {{ profile.economicCoordinate }}</div>
   </div>
   <hr>
   <div class="section debate">

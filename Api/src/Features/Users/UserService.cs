@@ -5,6 +5,7 @@ using System;
 using RabblyApi.Users.Models;
 using RabblyApi.Profiles.Models;
 using RabblyApi.Users.Dtos;
+using System.Linq;
 
 namespace RabblyApi.Users.Services
 {
@@ -25,6 +26,7 @@ namespace RabblyApi.Users.Services
                             .Include(u => u.Rank)
                             .SingleOrDefaultAsync(u => u.Email == email);
 
+            var debates = await _context.Debates.Where(u => u.CreatedBy == user).ToListAsync();
             if (user == null) return null;
             return user;
         }

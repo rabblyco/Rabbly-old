@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using Newtonsoft.Json;
+using RabblyApi.Debates.Models;
 using RabblyApi.Users.Models;
 
 namespace RabblyApi.Users.Dtos
@@ -39,6 +41,7 @@ namespace RabblyApi.Users.Dtos
     public class LoginResponseDto
     {
         public User User { get; set; }
+        public IEnumerable<Debate> Debates { get; set; }
         public string Token { get; set; }
 
     }

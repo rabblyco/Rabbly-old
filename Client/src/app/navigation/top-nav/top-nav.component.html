@@ -2,11 +2,11 @@
     <div class="right">
     </div>
     <div class="left" *ngIf="!authed; else notAuthed">
-        <button routerLink="/auth/login">Login</button>
+        <button class="auth" routerLink="/auth/login">Login</button>
     </div>
     <ng-template  #notAuthed>
         <div class="left">
-            <button (click)="logout()">Logout</button>
+            <button class="auth" (click)="logout()">Logout</button>
         </div>
     </ng-template>
 

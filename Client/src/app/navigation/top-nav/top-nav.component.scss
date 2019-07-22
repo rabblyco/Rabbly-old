@@ -12,4 +12,21 @@
     .right {
         padding: 0 16px;
     }
+
+    .auth {
+        border: none;
+        border-radius: 5px;
+        background-color: #ce7235;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 500;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:focus {
+            outline: none !important;
+        }
+    }
 }

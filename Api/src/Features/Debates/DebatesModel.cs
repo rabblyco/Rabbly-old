@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using RabblyApi.Comments.Models;
@@ -13,9 +14,9 @@ namespace RabblyApi.Debates.Models
         public string Id { get; set; }
         public string Topic { get; set; }
         public string Description { get; set; }
-        public IQueryable<Comment> Comments { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
         public User CreatedBy { get; set; }
-        public IQueryable<ScoreCard> ScoreCards { get; set; }
+        public IEnumerable<ScoreCard> ScoreCards { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime CreatedAt { get; set; }
     }
