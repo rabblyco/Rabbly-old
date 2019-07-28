@@ -18,20 +18,26 @@ namespace RabblyApi.Users.Services
             _context = context;
         }
 
-        public async Task<User> GetUser(string email)
+        public async Task<UserServiceLoginResponseDto> GetUserByEmail(string email)
         {
             var user = await _context.Users
                             .Include(u => u.Profile)
                             .Include(u => u.Group)
                             .Include(u => u.Rank)
                             .SingleOrDefaultAsync(u => u.Email == email);
-
-            var debates = await _context.Debates.Where(u => u.CreatedBy == user).ToListAsync();
             if (user == null) return null;
-            return user;
+
+            var userCreatedDebates = await _context.Debates.Where(d => d.CreatedById == user.Id).ToListAsync();
+            var userParticipatingDebates = await _context.Debates.Include(d => d.Comments).Where(d => d.Comments.Any(c => c.CreatedBy == user)).ToListAsync();
+
+            var serviceResponse = new UserServiceLoginResponseDto();
+            serviceResponse.User = user;
+            serviceResponse.CreatedDebates = userCreatedDebates;
+            serviceResponse.ParticipatingDebates = userParticipatingDebates;
+            return serviceResponse;
         }
 
-        public async Task<User> Login(LoginRegisterDto model)
+        public async Task<UserServiceLoginResponseDto> Login(LoginRegisterDto model)
         {
             var user = await _context.Users
                             .Include(u => u.Profile)
@@ -40,11 +46,18 @@ namespace RabblyApi.Users.Services
                             .SingleOrDefaultAsync(u => u.Email == model.Email);
             if (user == null) return null;
             var result = BCrypt.Net.BCrypt.EnhancedVerify(model.Password, user.Password);
-            if (result)
+            if (!result)
             {
-                return user;
+                return null;
             }
-            return null;
+            var userCreatedDebates = await _context.Debates.Where(d => d.CreatedById == user.Id).ToListAsync();
+            var userParticipatingDebates = await _context.Debates.Include(d => d.Comments).Where(d => d.Comments.Any(c => c.CreatedBy == user)).ToListAsync();
+
+            var serviceResponse = new UserServiceLoginResponseDto();
+            serviceResponse.User = user;
+            serviceResponse.CreatedDebates = userCreatedDebates;
+            serviceResponse.ParticipatingDebates = userParticipatingDebates;
+            return serviceResponse;
         }
 
         public async Task<bool> Register(LoginRegisterDto model)
@@ -84,6 +97,7 @@ namespace RabblyApi.Users.Services
             newUser.Email = email;
             var profile = new Profile();
             profile.User = newUser;
+            profile.Username = newUser.Email.Split("@")[0];
 
             try
             {

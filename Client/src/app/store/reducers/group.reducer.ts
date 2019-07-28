@@ -7,7 +7,7 @@ const initialState = {};
 export function groupReducer(state = initialState, action: UpdateGroup) {
     switch (action.type) {
         case GroupActions.UpdateGroup:
-            return {...state, group: action.payload.group, rank: action.payload.rank }
+            return {...state, group: action.payload.group, rank: action.payload.rank };
         default:
             return state;
     }

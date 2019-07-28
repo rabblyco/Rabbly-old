@@ -1,36 +1,49 @@
 <div class="side-nav">
-  <div class="section profile">
-    <!-- {{ profile | json }} -->
-    <div class="link-header title">
-      <a routerLink="/profile">{{ profile.username || "Add Username" }}</a>
+  <div [routerLink]="['/profile']" class="info-section profile">
+    <div class="profile-image">
+      <img
+        src="{{ profile.imageUrl || 'assets/images/default-user.svg' }}"
+        alt="Profile picture"
+        height="112px"
+        width="112px"
+      />
     </div>
-    <div class="inner" *ngIf="profile.ideology">Ideology: {{ profile.ideology }}</div>
+    <div class="profile-name">{{ profile.username || "Add Username" }}</div>
+    <div class="inner" *ngIf="profile.ideology">
+      Ideology: {{ profile.ideology }}
+    </div>
     <div class="inner">Social Position: {{ profile.socialCoordinate }}</div>
     <div class="inner">Economic Position: {{ profile.economicCoordinate }}</div>
   </div>
-  <div class="section group" *ngIf="group">
-    <div class="link-header title">
-      <a routerLink="/group/{{ group.id }}">{{ group.name }}...</a>
+  <hr />
+  <div
+    [routerLink]="['/group/' + group.id]"
+    class="info-section group"
+    *ngIf="group"
+  >
+    <div>
+      {{ group.name }}
     </div>
     <!-- Make this a link to view their permissions? -->
-    <div class="inner">Rank: {{ rank.title }}</div>
+    <div style="font-size: 14px;">{{ rank.title }}</div>
   </div>
-  <hr>
+  <hr />
   <div class="section debate">
-    <div class="link-header title">
+    <div style="text-align: center">
       Debates
     </div>
-    <div class="inner">
-      <div>Created</div>
-      <div class="inner">
-        Some debate
-      </div>
+    <div>
+      Created
     </div>
-    <div class="inner">
-      <div>Participating</div>
-      <div class="inner">
-        Another Debate
-      </div>
+    <div class="inner" *ngFor="let debate of createdDebates">
+      <div [routerLink]="['/debate/' + debate.id ]">{{ debate?.topic }}</div>
+    </div>
+    <div>
+      Participating
+    </div>
+    <div class="inner" *ngFor="let debate of participatingDebates">
+      <div [routerLink]="['/debate/' + debate.id ]">{{ debate?.topic }}</div>
     </div>
   </div>
+  <hr />
 </div>

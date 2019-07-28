@@ -5,11 +5,13 @@ import { RegisterComponent } from './main/auth/register/register.component';
 import { MainModule } from './main/main.module';
 import { GroupComponent } from './main/content/groups/groups/groups.component';
 import { ProfileComponent } from './main/content/profiles/profile/profile.component';
+import { DebateComponent } from './main/content/debates/debate/debate.component';
 
 const routes: Routes = [
   { path: 'group', component: GroupComponent },
   { path: 'group/:id', component: GroupComponent },
-  { path: 'profile', component: ProfileComponent}
+  { path: 'profile', component: ProfileComponent},
+  { path: 'debate/:id', component: DebateComponent }
 ];
 
 @NgModule({

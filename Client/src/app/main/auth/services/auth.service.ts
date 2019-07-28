@@ -32,7 +32,7 @@ export class AuthService {
     return this.http.post<any>(`${environment.url}/auth/social`, { email });
   }
 
-  public checkLogin() {
+  public checkLogin(): Observable<any> {
     return this.http.get(`${environment.url}/auth/check`);
   }
 }

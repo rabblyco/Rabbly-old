@@ -39,7 +39,7 @@ namespace RabblyApi.Controllers
             {
                 email = HttpContext.User.Claims.Where(c => c.Type == "email").FirstOrDefault().Value;
             }
-            var user = await _userService.GetUser(email);
+            var user = await _userService.GetUserByEmail(email);
             
             if(user == null) return BadRequest();
 
@@ -55,11 +55,13 @@ namespace RabblyApi.Controllers
 
             if (user == null) return BadRequest("Unable to login");
 
-            var token = GenerateToken(user);
+            var token = GenerateToken(user.User);
 
             var loginResult = new LoginResponseDto();
             loginResult.Token = new JwtSecurityTokenHandler().WriteToken(token);
-            loginResult.User = user;
+            loginResult.User = user.User;
+            loginResult.CreatedDebates = user.CreatedDebates;
+            loginResult.ParticipatingDebates = user.ParticipatingDebates;
 
             return Ok(loginResult);
         }
@@ -86,14 +88,16 @@ namespace RabblyApi.Controllers
         public async Task<ActionResult<LoginResponseDto>> ConfirmSocialLogin([FromBody] SocialLoginDto model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var user = await _userService.GetUser(model.Email);
+            var user = await _userService.GetUserByEmail(model.Email);
 
             if (user != null)
             {
-                var token = GenerateToken(user);
+                var token = GenerateToken(user.User);
                 var loginResult = new LoginResponseDto();
                 loginResult.Token = new JwtSecurityTokenHandler().WriteToken(token);
-                loginResult.User = user;
+                loginResult.User = user.User;
+                loginResult.CreatedDebates = user.CreatedDebates;
+                loginResult.ParticipatingDebates = user.ParticipatingDebates;
                 return Ok(loginResult);
             }
             else
@@ -103,11 +107,11 @@ namespace RabblyApi.Controllers
                 {
                     return BadRequest("Unable to create user");
                 }
-                user = await _userService.GetUser(model.Email);
-                var token = GenerateToken(user);
+                user = await _userService.GetUserByEmail(model.Email);
+                var token = GenerateToken(user.User);
                 var loginResult = new LoginResponseDto();
                 loginResult.Token = new JwtSecurityTokenHandler().WriteToken(token);
-                loginResult.User = user;
+                loginResult.User = user.User;
                 return Created("/auth/social", loginResult);
             }
         }

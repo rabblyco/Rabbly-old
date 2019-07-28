@@ -15,6 +15,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { authReducer } from './store/reducers/auth.reducer';
 import { groupReducer } from './store/reducers/group.reducer';
 import { profileReducer } from './store/reducers/profile.reducer';
+import { debateReducer } from './store/reducers/debate.reducer';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { profileReducer } from './store/reducers/profile.reducer';
     NavigationModule,
     MatSidenavModule,
     AppRoutingModule,
-    StoreModule.forRoot({ auth: authReducer, profile: profileReducer, group: groupReducer }),
+    StoreModule.forRoot({ auth: authReducer, profile: profileReducer, group: groupReducer, debate: debateReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),

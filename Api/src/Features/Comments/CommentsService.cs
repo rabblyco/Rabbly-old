@@ -39,7 +39,7 @@ namespace RabblyApi.Comments.Services
         {
             Comment newComment = new Comment();
             newComment.Text = comment.Text;
-            newComment.Debate = comment.Debate;
+            newComment.DebateId = comment.DebateId;
             newComment.CreatedBy = comment.CreatedBy;
             newComment.Parent = comment.Parent;
             try

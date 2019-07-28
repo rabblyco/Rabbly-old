@@ -33,8 +33,6 @@ namespace Api.Migrations
 
                     b.Property<string>("DebateId");
 
-                    b.Property<string>("DebateId1");
-
                     b.Property<string>("ParentId");
 
                     b.Property<string>("Text");
@@ -49,8 +47,6 @@ namespace Api.Migrations
                     b.HasIndex("CreatedById");
 
                     b.HasIndex("DebateId");
-
-                    b.HasIndex("DebateId1");
 
                     b.HasIndex("ParentId");
 
@@ -79,8 +75,6 @@ namespace Api.Migrations
                         .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CreatedById");
 
                     b.ToTable("Debates");
                 });
@@ -302,24 +296,13 @@ namespace Api.Migrations
                         .WithMany()
                         .HasForeignKey("CreatedById");
 
-                    b.HasOne("RabblyApi.Debates.Models.Debate", "Debate")
-                        .WithMany()
-                        .HasForeignKey("DebateId");
-
                     b.HasOne("RabblyApi.Debates.Models.Debate")
                         .WithMany("Comments")
-                        .HasForeignKey("DebateId1");
+                        .HasForeignKey("DebateId");
 
                     b.HasOne("RabblyApi.Comments.Models.Comment", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId");
-                });
-
-            modelBuilder.Entity("RabblyApi.Debates.Models.Debate", b =>
-                {
-                    b.HasOne("RabblyApi.Users.Models.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById");
                 });
 
             modelBuilder.Entity("RabblyApi.Groups.Models.Group", b =>
@@ -452,11 +435,15 @@ namespace Api.Migrations
                         {
                             b1.Property<string>("UserId");
 
-                            b1.Property<string>("Country");
+                            b1.Property<string>("Country")
+                                .ValueGeneratedOnAdd()
+                                .HasDefaultValue("None");
 
                             b1.Property<decimal>("EconomicCoordinate");
 
-                            b1.Property<string>("Gender");
+                            b1.Property<string>("Gender")
+                                .ValueGeneratedOnAdd()
+                                .HasDefaultValue("Secret");
 
                             b1.Property<string>("Ideology");
 
@@ -464,13 +451,18 @@ namespace Api.Migrations
 
                             b1.Property<decimal>("SocialCoordinate");
 
-                            b1.Property<string>("State");
+                            b1.Property<string>("State")
+                                .ValueGeneratedOnAdd()
+                                .HasDefaultValue("None");
 
                             b1.Property<string>("Username");
 
                             b1.Property<string>("ZipCode");
 
                             b1.HasKey("UserId");
+
+                            b1.HasIndex("Username")
+                                .IsUnique();
 
                             b1.ToTable("Users");
 

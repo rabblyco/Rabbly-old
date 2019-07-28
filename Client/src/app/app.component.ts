@@ -12,6 +12,7 @@ import {
   transition
 } from '@angular/animations';
 import { Observable, Subscription } from 'rxjs';
+import { UpdateDebates } from './store/actions/debate.actions';
 
 @Component({
   selector: 'app-root',
@@ -47,20 +48,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.authService.checkLogin().toPromise().then((res: any) => {
-      this.store.dispatch(new Login());
-      return res;
-    })
-    .then(res => {
-      this.store.dispatch(new UpdateProfile(res.profile));
-      return res;
-    })
-    .then(res => {
-      this.store.dispatch(new UpdateGroup({ group: res.group, rank: res.rank }));
-      return res;
-    }).catch(err => {
-      return err;
-    });
+      this.authService.checkLogin().subscribe((res: any) => {
+        console.log(res);
+        this.store.dispatch(new Login());
+        this.store.dispatch(new UpdateProfile(res.user.profile));
+        this.store.dispatch(new UpdateGroup({ group: res.user.group, rank: res.user.rank }));
+        this.store.dispatch(new UpdateDebates({ createdDebates: res.createdDebates, participatingDebates: res.participatingDebates }));
+      }, err => err);
   }
 
   setState() {

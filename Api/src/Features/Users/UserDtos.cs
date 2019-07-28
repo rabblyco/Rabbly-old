@@ -41,8 +41,16 @@ namespace RabblyApi.Users.Dtos
     public class LoginResponseDto
     {
         public User User { get; set; }
-        public IEnumerable<Debate> Debates { get; set; }
+        public IEnumerable<Debate> CreatedDebates { get; set; }
+        public IEnumerable<Debate> ParticipatingDebates { get; set; }
         public string Token { get; set; }
 
+    }
+
+    public class UserServiceLoginResponseDto
+    {
+        public User User { get; set; }
+        public IEnumerable<Debate> CreatedDebates { get; set; }
+        public IEnumerable<Debate> ParticipatingDebates { get; set; }
     }
 }

@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Group } from '../../models/group.model';
 import { Rank } from '../../models/rank.model';
 import { Profile } from '../../models/profile.model';
+import { Debate } from '../../models/debate.model';
 
 @Component({
   selector: 'app-side-nav',
@@ -15,12 +16,16 @@ export class SideNavComponent implements OnInit, OnDestroy {
   public group: Group;
   public rank: Rank;
   public profile: Profile;
+  public createdDebates: Debate[];
+  public participatingDebates: Debate[];
 
   constructor(private store: Store<any>) {
     this.storeSubscription = store.subscribe(res => {
       this.group = res.group.group;
       this.rank = res.group.rank;
       this.profile = res.profile;
+      this.createdDebates = res.debate.createdDebates;
+      this.participatingDebates = res.debate.participatingDebates;
     });
   }
 

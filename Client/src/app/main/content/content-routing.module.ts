@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DebateComponent } from './debate/debate.component';
+import { DebateComponent } from './debates/debate/debate.component';
 import { GroupComponent } from './groups/groups/groups.component';
 import { ProfileComponent } from './profiles/profile/profile.component';
 

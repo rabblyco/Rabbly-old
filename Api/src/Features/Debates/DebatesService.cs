@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using RabblyApi.Data;
 using RabblyApi.Debates.Dtos;
 using RabblyApi.Debates.Models;
+using RabblyApi.Users.Models;
 
 namespace RabblyApi.Debates.Services
 {
@@ -29,6 +30,11 @@ namespace RabblyApi.Debates.Services
             return await _context.Debates.OrderByDescending(d => d.CreatedAt).Take(12).Where(d => d.CreatedAt > DateTime.Today.AddDays(-7)).ToListAsync();
         }
 
+        public async Task<List<Debate>> GetDebatesByUser(User user)
+        {
+            return await _context.Debates.Where(d => d.CreatedById == user.Id).ToListAsync();
+        }
+
         /// <summary>
         /// This method will find a debate by Id
         /// </summary>
@@ -47,7 +53,7 @@ namespace RabblyApi.Debates.Services
             Debate newDebate = new Debate();
             newDebate.Description = debate.Description;
             newDebate.Topic = debate.Topic;
-            newDebate.CreatedBy = debate.CreatedBy;
+            newDebate.CreatedById = debate.CreatedById;
 
             try
             {
@@ -66,7 +72,7 @@ namespace RabblyApi.Debates.Services
         {
             Debate debateToEdit = await _context.Debates
                                     .Where(d => d.Id == id)
-                                    .Where(d => d.CreatedBy == debate.CreatedBy)
+                                    .Where(d => d.CreatedById== debate.CreatedById)
                                     .FirstAsync();
 
             if (debate == null)

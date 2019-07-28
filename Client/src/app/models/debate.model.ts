@@ -5,4 +5,5 @@ export interface Debate {
     description: string;
     createdAt: string;
     updatedAt: string;
+    comments: Comment[];
 }

@@ -46,6 +46,7 @@ namespace RabblyApi.Data
             GenerateDebates().Wait();
             GenerateComments().Wait();
             GenerateGroups().Wait();
+            GenerateComments().Wait();
         }
 
         private async Task GenerateDevelopmentUsers()
@@ -102,27 +103,27 @@ namespace RabblyApi.Data
                 new DebateRequestDto() {
                     Topic = $"New guy {users[0].Email}",
                     Description = $"Description {users[0].Email}",
-                    CreatedBy = users[0]
+                    CreatedById = users[0].Id
                 },
                 new DebateRequestDto() {
                     Topic = $"New guy {users[1].Email}",
                     Description = $"Description {users[1].Email}",
-                    CreatedBy = users[1]
+                    CreatedById = users[1].Id
                 },
                 new DebateRequestDto() {
                     Topic = $"New guy {users[2].Email}",
                     Description = $"Description {users[2].Email}",
-                    CreatedBy = users[2]
+                    CreatedById = users[2].Id
                 },
                 new DebateRequestDto() {
                     Topic = $"New guy {users[3].Email}",
                     Description = $"Description {users[3].Email}",
-                    CreatedBy = users[3]
+                    CreatedById = users[3].Id
                 },
                 new DebateRequestDto() {
                     Topic = $"New guy {users[4].Email}",
                     Description = $"Description {users[4].Email}",
-                    CreatedBy = users[4]
+                    CreatedById = users[4].Id
                 },
             };
 
@@ -141,31 +142,31 @@ namespace RabblyApi.Data
                 new CommentRequestDto() {
                     Text = $"Texty {debates[0].Topic}",
                     CreatedBy = users[0],
-                    Debate = debates[0],
+                    DebateId = debates[0].Id,
                     Parent = null
                 },
                 new CommentRequestDto() {
                     Text = $"Texty {debates[1].Topic}",
                     CreatedBy = users[1],
-                    Debate = debates[1],
+                    DebateId = debates[1].Id,
                     Parent = null
                 },
                 new CommentRequestDto() {
                     Text = $"Texty {debates[2].Topic}",
                     CreatedBy = users[2],
-                    Debate = debates[2],
+                    DebateId = debates[2].Id,
                     Parent = null
                 },
                 new CommentRequestDto() {
                     Text = $"Texty {debates[3].Topic}",
                     CreatedBy = users[3],
-                    Debate = debates[3],
+                    DebateId = debates[3].Id,
                     Parent = null
                 },
                 new CommentRequestDto() {
                     Text = $"Texty {debates[4].Topic}",
                     CreatedBy = users[4],
-                    Debate = debates[4],
+                    DebateId = debates[4].Id,
                     Parent = null
                 }
             };

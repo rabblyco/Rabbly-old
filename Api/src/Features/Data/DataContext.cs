@@ -56,6 +56,7 @@ namespace RabblyApi.Data
             builder.Entity<User>().Property(u => u.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             // Profile
+            builder.Entity<Profile>().HasIndex(p => p.Username).IsUnique();
             builder.Entity<Profile>().Property(p => p.Country).HasConversion(c => c.ToString(), c => (Countries)Enum.Parse(typeof(Countries), c)).HasDefaultValue(Countries.None);
             builder.Entity<Profile>().Property(p => p.State).HasConversion(s => s.ToString(), s => (States)Enum.Parse(typeof(States), s)).HasDefaultValue(States.None);
             builder.Entity<Profile>().Property(p => p.Gender).HasConversion(g => g.ToString(), g => (Gender)Enum.Parse(typeof(Gender), g)).HasDefaultValue(Gender.Secret);
@@ -79,7 +80,7 @@ namespace RabblyApi.Data
 
             // Comments
             builder.Entity<Comment>().HasKey(c => c.Id);
-            builder.Entity<Comment>().HasOne(c => c.Debate);
+            builder.Entity<Comment>().HasOne<Debate>().WithMany(d => d.Comments).HasForeignKey(c => c.DebateId);
             builder.Entity<Comment>().HasMany(c => c.ScoreCard);
             builder.Entity<Comment>().HasMany(c => c.Children);
             builder.Entity<Comment>().HasOne(c => c.Parent);
@@ -89,7 +90,6 @@ namespace RabblyApi.Data
 
             // Debates
             builder.Entity<Debate>().HasKey(d => d.Id);
-            builder.Entity<Debate>().HasOne(d => d.CreatedBy);
             builder.Entity<Debate>().HasMany(d => d.ScoreCards);
             builder.Entity<Debate>().HasMany(d => d.Comments);
             builder.Entity<Debate>().Property(d => d.CreatedAt).ValueGeneratedOnAdd().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");

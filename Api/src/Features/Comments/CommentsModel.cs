@@ -11,7 +11,7 @@ namespace RabblyApi.Comments.Models
     {
         public string Id { get; set; }
         public string Text { get; set; }
-        public Debate Debate { get; set; }
+        public string DebateId { get; set; }
         public User CreatedBy { get; set; }
         public Comment Parent { get; set; }
         public IQueryable<Comment> Children { get; set; }
