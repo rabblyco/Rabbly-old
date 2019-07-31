@@ -1,69 +1,72 @@
 .side-nav {
+  padding: 0;
+  color: white;
+
+  .section {
     padding: 0;
-    color: white;
+    outline-style: none !important;
+    & > *,
+    & > * > * {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      word-break: break-all;
+    }
+    .section-title {
+        padding: 0px 12px 4px 12px;
+    }
+    .inner {
+      font-size: 14px;
+      padding: 4px 4px 4px 24px;
+      cursor: pointer;
 
-    .section {
-        padding: 0 12px 4px 12px;
-        outline-style: none !important;
-        & > *,
-        & > * > * {
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-            word-break: break-all;
+      &:hover {
+        background-color: lighten($color: #6135ce, $amount: 10);
+      }
+    }
+  }
 
-        }
-        .inner {
-            font-size: 14px;
-            padding: 4px 4px 4px 12px;
-        }
+  .info-section {
+    outline-style: none !important;
+    cursor: pointer;
+    padding: 0 12px 4px 12px;
+
+    &:hover {
+      background-color: lighten($color: #6135ce, $amount: 10);
     }
 
-    .info-section {
-        outline-style: none !important;
-        cursor: pointer;
-        padding: 0 12px 4px 12px;
-
-        &:hover {
-            background-color: lighten($color: #6135ce, $amount: 10)
-        }
-
-        &.group {
-            text-align: center;
-        }
-
-        &.profile {
-            text-align: center;
-
-            .inner {
-                font-size: 14px;
-                padding-left: 0px;
-            }
-
-            .profile-image {
-                padding-bottom: 8px;
-            }
-
-            .profile-image > img {
-                border-radius: 50% 50%;
-                padding: 0;
-                background-color: white;
-            }
-
-            
-        }
-        & > *,
-        & > * > * {
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-            word-break: break-all;
-
-        }
-        .inner {
-            font-size: 14px;
-            padding: 4px 4px 4px 12px;
-            // max-width: 196px;
-        }
+    &.group {
+      text-align: center;
     }
+
+    &.profile {
+      text-align: center;
+
+      .inner {
+        font-size: 14px;
+        padding-left: 0px;
+      }
+
+      .profile-image {
+        padding-bottom: 8px;
+      }
+
+      .profile-image > img {
+        border-radius: 50% 50%;
+        padding: 0;
+        background-color: white;
+      }
+    }
+    & > *,
+    & > * > * {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      word-break: break-all;
+    }
+    .inner {
+      font-size: 14px;
+      padding: 4px 4px 4px 12px;
+    }
+  }
 }

@@ -1,0 +1,31 @@
+<div class="debate">
+  <div class="debate-card">
+    <div class="info">
+      <div>
+          <div class="created">
+              <div>Created:</div>
+              <div>{{ debate?.createdAt | amTimeAgo }}</div>
+          </div>
+          <div *ngIf="editedAfterCreation" class="edited">
+              <div>Edited:</div>
+              <div>{{ debate.updatedAt | amTimeAgo }}</div>
+          </div>
+      </div>
+      <div class="score-card-button">
+          <button type="button" class="score-card-display">Score Card</button>
+      </div>
+    </div>
+    <div class="main">
+      <div class="topic">{{ debate?.topic }}</div>
+      <div class="description">
+        {{ debate?.description }}
+      </div>
+    </div>
+  </div>
+  <app-comments [comment]="comment" *ngFor="let comment of debate?.comments">
+    <app-comments
+      style="padding-left: 12px;"
+      [comment]="comment"
+    ></app-comments>
+  </app-comments>
+</div>

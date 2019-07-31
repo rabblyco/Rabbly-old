@@ -6,6 +6,7 @@ import { Login } from '../../../store/actions/auth.actions';
 import { UpdateGroup } from '../../../store/actions/group.actions';
 import { UpdateProfile } from '../../../store/actions/profile.actions';
 import { FormBuilder, Validators } from '@angular/forms';
+import { UpdateDebates } from '../../../store/actions/debate.actions';
 import {
   AuthService as SocialAuthService,
   GoogleLoginProvider
@@ -43,20 +44,15 @@ export class LoginComponent implements OnInit {
       password: this.form.password.value
     };
     if (this.loginForm.invalid) { return; }
-    this.authService.login(creds).toPromise().then(res => {
-      this.store.dispatch(new Login());
-      return res;
-    })
-    .then(res => {
-      this.store.dispatch(new UpdateProfile(res.user.profile));
-      return res;
-    })
-    .then(res => {
-      this.store.dispatch(new UpdateGroup({ group: res.user.group, rank: res.user.rank }));
-      localStorage.setItem('token', res.token);
-      this.router.navigateByUrl('/');
-      return res;
-    }).catch(err => {
+    this.authService.login(creds).subscribe((res: any) => {
+        console.log(res);
+        this.store.dispatch(new Login());
+        this.store.dispatch(new UpdateProfile(res.user.profile));
+        this.store.dispatch(new UpdateGroup({ group: res.user.group, rank: res.user.rank }));
+        this.store.dispatch(new UpdateDebates({ createdDebates: res.createdDebates, participatingDebates: res.participatingDebates }));
+        localStorage.setItem('token', res.token);
+        this.router.navigateByUrl('/');
+    }, err => {
       // this.store.dispatch(null);
       this.loginForm.setErrors({
         'loginError': 'Unable to login'
@@ -77,7 +73,8 @@ export class LoginComponent implements OnInit {
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (userData) => {
         console.log(socialPlatform + ' sign in data : ' , userData);
-        this.authService.confirmSocialLogin(userData.email).toPromise().then(res => {
+        this.authService.confirmSocialLogin(userData.email).toPromise()
+        .then(res => {
           this.store.dispatch(new Login());
           return res;
         })
@@ -90,7 +87,8 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', res.token);
           this.router.navigateByUrl('/');
           return res;
-        }).catch(err => {
+        })
+        .catch(err => {
           // this.store.dispatch(null);
           this.loginForm.setErrors({
             'loginError': 'Unable to login'

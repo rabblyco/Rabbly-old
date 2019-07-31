@@ -3,6 +3,7 @@
     top: 56px;
     height: calc(100vh - 56px);
     width: 100%;
+    background-color: #fbfbfb;
 
     .mat-sidenav {
         width: 244px;
@@ -10,7 +11,7 @@
     }
 
     .mat-drawer-content {
-        padding: 22px 0 0 22px;
+        padding: 22px 4px 12px 22px;
         .toggler {
             position: absolute;
             top: 3px;
@@ -24,9 +25,13 @@
         }
 
         .main {
-            padding: 0 16px 16px 0;
+            padding: 0;
             display: flex;
-            justify-content: center;
+            width: 100%;
+
+            &:nth-child(n + 1) {
+                width: 100% !important;
+            }
         }
     }
 }

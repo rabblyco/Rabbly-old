@@ -1,0 +1,45 @@
+.debate {
+    width: 100%;
+
+    .debate-card {
+        display: flex;
+        border: 1px solid grey;
+        flex-direction: row;
+        min-height: 112px;
+        font-size: 14px;
+        margin-bottom: 8px;
+    
+        .info {
+            border-right: 1px solid grey;
+            font-size: 12px;
+            padding: 8px;
+            min-width: 144px;
+            max-width: 198px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .created {
+                display: flex;
+                justify-content: space-between;
+            }
+            .edited {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .score-card-button {
+                text-align: center;
+            }
+        }
+    
+        .main {
+            padding: 8px;
+        }
+    }
+}
+
+:host {
+    width:100%;
+}
+

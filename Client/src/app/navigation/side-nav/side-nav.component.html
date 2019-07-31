@@ -29,20 +29,20 @@
   </div>
   <hr />
   <div class="section debate">
-    <div style="text-align: center">
+    <div style="text-align: center; padding: 0px 12px;">
       Debates
     </div>
-    <div>
+    <div class="section-title">
       Created
     </div>
     <div class="inner" *ngFor="let debate of createdDebates">
-      <div [routerLink]="['/debate/' + debate.id ]">{{ debate?.topic }}</div>
+      <div [ngStyle]="{ 'background-color': this.currentItem === debate.id ? '#ce7235' : 'unset' }"  [routerLink]="['/debate/' + debate.id ]">{{ debate?.topic }}</div>
     </div>
-    <div>
+    <div class="section-title">
       Participating
     </div>
     <div class="inner" *ngFor="let debate of participatingDebates">
-      <div [routerLink]="['/debate/' + debate.id ]">{{ debate?.topic }}</div>
+      <div [ngStyle]="{ 'background-color': this.currentItem === debate.id ? '#ce7235' : 'unset' }" [routerLink]="['/debate/' + debate.id ]">{{ debate?.topic }}</div>
     </div>
   </div>
   <hr />

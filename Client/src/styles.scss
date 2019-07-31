@@ -4,7 +4,7 @@
    License: none (public domain)
 */
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-@import url('https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,700,700i&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700&display=swap&subset=latin-ext');
 html,
 body,
 div,
@@ -142,7 +142,6 @@ form {
 
 
 body {
-    background-color: #f9f9f9;
     font-family: 'Muli', sans-serif;
 
     a {
@@ -153,6 +152,23 @@ body {
 button {
   border-width: 1px;
   border-style: solid;
-  border-radius: 0;
-  padding: 6px 10px;
+  border-radius: .4rem;
+  padding: 8px 12px;
+  background-color: #fff;
+  outline-style: none !important;
+  color: #6135ce;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lighten($color: #6135ce, $amount: 10);
+    border-color: lighten($color: #6135ce, $amount: 10);
+    color: #fff;
+  }
+
+  &:active {
+    background-color: #6135ce;
+    border-color: #6135ce;
+    color: #fff;
+  }
 }

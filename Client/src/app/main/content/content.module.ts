@@ -7,11 +7,13 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthenticationInterceptor } from './authentication.interceptor';
 import { DebatesComponent } from './debates/debates/debates.component';
 import { CommentsComponent } from './debates/comments/comments.component';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   declarations: [DebateComponent, GroupComponent, ProfileComponent, DebatesComponent, DebateComponent, CommentsComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    MomentModule
   ],
   providers: [
     {

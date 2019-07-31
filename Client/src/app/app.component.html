@@ -4,12 +4,11 @@
     <app-side-nav></app-side-nav>
   </mat-sidenav>
   <mat-sidenav-content>
-      <!-- [ngStyle]="{ 'transform': opened ? 'rotate(0deg)' : 'rotate(180deg)' }" -->
       <i class="material-icons toggler" (click)="sideNav.toggle()" [@openClose]="openingState ? 'opened' : 'closed'" [ngStyle]="{ 'display' : authed ? 'initial' : 'none' }">
         chevron_left
       </i>
       <div class="main">
-          <router-outlet></router-outlet>
+          <router-outlet class="outlet"></router-outlet>
       </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
