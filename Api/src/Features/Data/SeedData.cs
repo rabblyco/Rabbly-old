@@ -79,7 +79,7 @@ namespace RabblyApi.Data
                 var editProfile = _mapper.Map<ProfileEditDto>(user.Profile);
                 var random = new Random();
                 editProfile.Country = (Countries)countryValues.GetValue(random.Next(countryValues.Length));
-                if (editProfile.Country == Countries.UnitedStates)
+                if (editProfile.Country == Countries.United_States)
                 {
                     random = new Random();
                     editProfile.State = (States)stateValues.GetValue(random.Next(stateValues.Length));
@@ -90,7 +90,7 @@ namespace RabblyApi.Data
                 editProfile.Ideology = "Communist";
                 editProfile.SocialCoordinate = random.Next(-10, 10);
                 editProfile.EconomicCoordinate = random.Next(-10, 10);
-                await _profileService.EditProfile(user.Id, editProfile);
+                await _profileService.EditProfile(user.Email, editProfile);
             }
 
             await _context.SaveChangesAsync();

@@ -17,4 +17,11 @@ export class ProfileComponent implements OnInit {
     this.profileService.getProfile().subscribe(res => this.profile = res);
   }
 
+  public setStateDisplayValue(countryName: string) {
+    if (countryName.includes('_')) {
+      return countryName.replace(/_/gm, ' ');
+    }
+    return countryName;
+  }
+
 }

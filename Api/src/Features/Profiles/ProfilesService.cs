@@ -29,9 +29,9 @@ namespace RabblyApi.Profiles.Services
             return user.Profile;
         }
 
-        public async Task<Models.Profile> EditProfile(string id, ProfileEditDto editProfile)
+        public async Task<Models.Profile> EditProfile(string email, ProfileEditDto editProfile)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
             if (user.Profile == null) return null;
             user.Profile = _mapper.Map<RabblyApi.Profiles.Models.Profile>(editProfile);
             try

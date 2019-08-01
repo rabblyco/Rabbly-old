@@ -130,6 +130,10 @@ table {
   border-spacing: 0;
 }
 
+hr {
+  margin: 0;
+}
+
 form {
   input {
     outline: none;
@@ -146,6 +150,10 @@ body {
 
     a {
       color: inherit;
+    }
+
+    *:focus {
+      outline-style: none !important;
     }
 }
 
@@ -170,5 +178,27 @@ button {
     background-color: #6135ce;
     border-color: #6135ce;
     color: #fff;
+  }
+}
+
+.advert {
+  background-color: red;
+  color: white;
+
+  &.advert-side {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 600px;
+    width: 300px;
+    text-align: center;
+    writing-mode: vertical-rl;
+  }
+
+  &.advert-top {
+      display: none;
+      height: 90px;
+      width: 728px;
+      margin: 0 auto;
   }
 }

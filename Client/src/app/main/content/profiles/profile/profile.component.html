@@ -1,3 +1,53 @@
-<div *ngIf="profile">
-  <div>{{ profile | json }}</div>
+<div class="advert advert-top">
+  Advertisement
+</div>
+<div *ngIf="profile" class="profile">
+  <img
+    height="112px;"
+    width="112px;"
+    [src]="profile.imageUrl || '/assets/images/default-user.svg'"
+    alt="Profile picture"
+  />
+  <div class="profile-row">
+    <div class="title">Username:</div>
+    <div class="value">{{ profile?.username }}</div>
+  </div>
+
+  <div class="profile-row">
+    <div class="title">Gender:</div>
+    <div class="value">{{ profile?.gender }}</div>
+  </div>
+
+  <div class="profile-row">
+      <div class="title">Country:</div>
+      <div class="value">{{ setStateDisplayValue(profile?.country) }}</div>
+  </div>
+
+  <div class="profile-row" *ngIf="profile?.state !== 'None'">
+      <div class="title">State:</div>
+      <div class="value">{{ setStateDisplayValue(profile?.state) }}</div>
+  </div>
+
+  <div class="profile-row">
+      <div class="title">Zip Code:</div>
+      <div class="value">{{ profile?.zipCode }}</div>
+  </div>
+
+  <div class="profile-row">
+      <div class="title">Ideology:</div>
+      <div class="value">{{ profile?.ideology }}</div>
+  </div>
+
+  <div class="profile-row">
+      <div class="title">Economic Coordinate:</div>
+      <div class="value">{{ profile?.economicCoordinate }}</div>
+  </div>
+
+  <div class="profile-row">
+      <div class="title">Social Coordinate:</div>
+      <div class="value">{{ profile?.socialCoordinate }}</div>
+  </div>
+</div>
+<div class="advert advert-side">
+  Advertisement
 </div>

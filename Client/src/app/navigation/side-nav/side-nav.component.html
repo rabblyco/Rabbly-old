@@ -1,5 +1,11 @@
 <div class="side-nav">
-  <div [routerLink]="['/profile']" class="info-section profile">
+  <div
+    [routerLink]="['/profile']"
+    class="info-section profile"
+    [ngStyle]="{
+      'background-color': this.currentItem === 'profile' ? '#ce6135' : ''
+    }"
+  >
     <div class="profile-image">
       <img
         src="{{ profile.imageUrl || 'assets/images/default-user.svg' }}"
@@ -19,6 +25,9 @@
   <div
     [routerLink]="['/group/' + group.id]"
     class="info-section group"
+    [ngStyle]="{
+      'background-color': this.currentItem === group.id ? '#ce6135' : ''
+    }"
     *ngIf="group"
   >
     <div>
@@ -35,14 +44,26 @@
     <div class="section-title">
       Created
     </div>
-    <div class="inner" *ngFor="let debate of createdDebates">
-      <div [ngStyle]="{ 'background-color': this.currentItem === debate.id ? '#ce7235' : 'unset' }"  [routerLink]="['/debate/' + debate.id ]">{{ debate?.topic }}</div>
+    <div
+      class="inner"
+      *ngFor="let debate of createdDebates"
+      [ngStyle]="{
+        'background-color': this.currentItem === debate.id ? '#ce6135' : ''
+      }"
+    >
+      <div [routerLink]="['/debate/' + debate.id]">{{ debate?.topic }}</div>
     </div>
     <div class="section-title">
       Participating
     </div>
-    <div class="inner" *ngFor="let debate of participatingDebates">
-      <div [ngStyle]="{ 'background-color': this.currentItem === debate.id ? '#ce7235' : 'unset' }" [routerLink]="['/debate/' + debate.id ]">{{ debate?.topic }}</div>
+    <div
+      class="inner"
+      *ngFor="let debate of participatingDebates"
+      [ngStyle]="{
+        'background-color': this.currentItem === debate.id ? '#ce6135' : ''
+      }"
+    >
+      <div [routerLink]="['/debate/' + debate.id]">{{ debate?.topic }}</div>
     </div>
   </div>
   <hr />

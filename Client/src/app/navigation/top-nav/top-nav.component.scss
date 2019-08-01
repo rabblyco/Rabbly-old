@@ -11,6 +11,18 @@
     .left,
     .right {
         padding: 0 16px;
+
+        .home-link {
+            margin-left: 76px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+
+            &:hover {
+                color: #ce6135;
+            }
+        }
     }
 
     .auth {

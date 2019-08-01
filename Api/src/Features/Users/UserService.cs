@@ -28,7 +28,7 @@ namespace RabblyApi.Users.Services
             if (user == null) return null;
 
             var userCreatedDebates = await _context.Debates.Where(d => d.CreatedById == user.Id).ToListAsync();
-            var userParticipatingDebates = await _context.Debates.Include(d => d.Comments).Where(d => d.Comments.Any(c => c.CreatedBy == user)).ToListAsync();
+            var userParticipatingDebates = await _context.Debates.Where(d => d.CreatedById != user.Id).Include(d => d.Comments).Where(d => d.Comments.Any(c => c.CreatedBy == user)).ToListAsync();
 
             var serviceResponse = new UserServiceLoginResponseDto();
             serviceResponse.User = user;
@@ -51,7 +51,7 @@ namespace RabblyApi.Users.Services
                 return null;
             }
             var userCreatedDebates = await _context.Debates.Where(d => d.CreatedById == user.Id).ToListAsync();
-            var userParticipatingDebates = await _context.Debates.Include(d => d.Comments).Where(d => d.Comments.Any(c => c.CreatedBy == user)).ToListAsync();
+            var userParticipatingDebates = await _context.Debates.Where(d => d.CreatedById != user.Id).Include(d => d.Comments).Where(d => d.Comments.Any(c => c.CreatedBy == user)).ToListAsync();
 
             var serviceResponse = new UserServiceLoginResponseDto();
             serviceResponse.User = user;

@@ -3,6 +3,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RabblyApi.Profiles.Dtos;
+using RabblyApi.Profiles.Models;
 using RabblyApi.Profiles.Services;
 
 namespace RabblyApi.Profiles.Controllers
@@ -20,14 +22,25 @@ namespace RabblyApi.Profiles.Controllers
         }
 
         [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> GetUserProfile()
+        public async Task<ActionResult<Profile>> GetUserProfile()
         {
             var email = HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Email).FirstOrDefault().Value;
             var profile = await _profileService.GetProfile(email);
             if (profile == null)
             {
                 return NotFound();
+            }
+            return Ok(profile);
+        }
+
+        [HttpPatch]
+        public async Task<ActionResult<Profile>> EditUserProfile(ProfileEditDto profileToEdit)
+        {
+            var email = HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Email).FirstOrDefault().Value;
+            var profile = await _profileService.EditProfile(email, profileToEdit);
+            if (profile == null)
+            {
+                return BadRequest(profileToEdit);
             }
             return Ok(profile);
         }
