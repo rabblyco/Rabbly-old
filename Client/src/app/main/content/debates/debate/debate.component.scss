@@ -14,8 +14,8 @@
       border-right: 1px solid grey;
       font-size: 12px;
       padding: 8px;
-      min-width: 144px;
-      max-width: 198px;
+      min-width: 198px;
+      max-width: 288px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -41,11 +41,19 @@
 }
 
 :host {
-  width: calc(100% - 300px);
+  width: calc(100% - 336px);
+}
+
+.advert-side-medium {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 336px;
+    height: 280px;
 }
 
 @media screen and (max-width: 1200px) {
-  .advert-side {
+  .advert-side-medium {
     display: none;
   }
 

@@ -1,0 +1,24 @@
+:host {
+  width: calc(100% - 336px);
+}
+
+@media screen and (max-width: 1200px) {
+  .advert-side-large {
+    display: none;
+  }
+  :host {
+    width: 100%;
+  }
+
+  .advert-side-medium {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 336px;
+    height: 280px;
+  }
+
+  .advert-top {
+    display: flex;
+  }
+}
