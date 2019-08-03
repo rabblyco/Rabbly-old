@@ -202,3 +202,26 @@ button {
       margin: 0 auto;
   }
 }
+
+
+.mat-dialog-container {
+  border-radius: 0 !important;
+
+  .mat-dialog-content {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .reply-input {
+    width: 100%;
+    min-height: 112px;
+  }
+
+  .mat-dialog-actions {
+    justify-content: flex-end !important;
+
+    button {
+      margin-left: 4px !important;
+    }
+  }
+}

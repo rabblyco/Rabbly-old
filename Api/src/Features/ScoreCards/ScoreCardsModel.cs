@@ -1,14 +1,13 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using Rabbly.Data.Models;
 using RabblyApi.Data.Utils;
 using RabblyApi.Users.Models;
 
 namespace RabblyApi.ScoreCards.Models
 {
-    public class ScoreCard
+    public class ScoreCard : BaseModel
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Id { get; set; }
         public User User { get; set; }
         public Opinion Opinion { get; set; }
         public int AdHominem { get; set; }
@@ -35,7 +34,5 @@ namespace RabblyApi.ScoreCards.Models
         public int Anecdotal { get; set; }
         public int CherryPick { get; set; }
         public int MiddleGround { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public DateTime CreatedAt { get; set; }
     }
 }

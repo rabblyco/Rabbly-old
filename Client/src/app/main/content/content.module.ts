@@ -8,12 +8,20 @@ import { AuthenticationInterceptor } from './authentication.interceptor';
 import { DebatesComponent } from './debates/debates/debates.component';
 import { CommentsComponent } from './debates/comments/comments.component';
 import { MomentModule } from 'ngx-moment';
+import { CommentDialogComponent } from "./debates/comments/comment-dialog/comment-dialog.component";
+import { MatDialogModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [DebateComponent, GroupComponent, ProfileComponent, DebatesComponent, DebateComponent, CommentsComponent],
+  declarations: [DebateComponent, GroupComponent, ProfileComponent, DebatesComponent, DebateComponent, CommentsComponent, CommentDialogComponent],
   imports: [
     CommonModule,
-    MomentModule
+    MomentModule,
+    MatDialogModule,
+    FormsModule
+  ],
+  entryComponents: [
+    CommentDialogComponent
   ],
   providers: [
     {

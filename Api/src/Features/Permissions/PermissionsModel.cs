@@ -1,12 +1,12 @@
 using System;
 using Newtonsoft.Json;
+using Rabbly.Data.Models;
 using RabblyApi.Ranks.Models;
 
 namespace RabblyApi.Permissions.Models
 {
-    public class Permission
+    public class Permission : BaseModel
     {
-        public string Id { get; set; }
         // What can they create
         public bool CanCreateRole { get; set; }
         public bool CanCreateDiscussion { get; set; }
@@ -26,7 +26,5 @@ namespace RabblyApi.Permissions.Models
         // Metadata
         [JsonIgnore]
         public Rank Rank { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public DateTime CreatedAt { get; set; }
     }
 }

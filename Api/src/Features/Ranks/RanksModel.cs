@@ -2,15 +2,15 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Newtonsoft.Json;
+using Rabbly.Data.Models;
 using RabblyApi.Groups.Models;
 using RabblyApi.Permissions.Models;
 using RabblyApi.Users.Models;
 
 namespace RabblyApi.Ranks.Models
 {
-    public class Rank
+    public class Rank : BaseModel
     {
-        public string Id { get; set; }
         public string Title { get; set; }
         public int Level { get; set; }
         [JsonIgnore]
@@ -18,7 +18,5 @@ namespace RabblyApi.Ranks.Models
         [JsonIgnore]
         public IQueryable<User> Users { get; set; }
         public Permission Permissions { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public DateTime CreatedAt { get; set; }
     }
 }

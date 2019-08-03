@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Newtonsoft.Json;
+using Rabbly.Data.Models;
 using RabblyApi.Ranks.Models;
 using RabblyApi.Users.Models;
 
 namespace RabblyApi.Groups.Models
 {
-    public class Group
+    public class Group : BaseModel
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Id { get; set; }
         public string Name { get; set; }
         public string Bio { get; set; }
         public string LogoUrl { get; set; }
@@ -24,7 +23,5 @@ namespace RabblyApi.Groups.Models
         
         [JsonIgnore]
         public IEnumerable<Rank> Ranks { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public DateTime CreatedAt { get; set; }
     }
 }

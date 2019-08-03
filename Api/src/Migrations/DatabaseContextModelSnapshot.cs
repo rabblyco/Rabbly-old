@@ -16,7 +16,7 @@ namespace Api.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("RabblyApi.Comments.Models.Comment", b =>
@@ -327,7 +327,8 @@ namespace Api.Migrations
 
                     b.OwnsOne("RabblyApi.Permissions.Models.Permission", "Permissions", b1 =>
                         {
-                            b1.Property<string>("Id");
+                            b1.Property<string>("Id")
+                                .ValueGeneratedOnAdd();
 
                             b1.Property<bool>("CanAddMember")
                                 .ValueGeneratedOnAdd()
