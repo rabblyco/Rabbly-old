@@ -21,7 +21,12 @@
       cursor: pointer;
 
       &:hover {
-        background-color: lighten($color: #6135ce, $amount: 10);
+        background-color: lighten($color: #7d1707, $amount: 10);
+      }
+
+      &.selected {
+        background-color: #073c7d;
+        font-weight: 600 !important;
       }
     }
   }
@@ -32,7 +37,12 @@
     padding: 4px 12px 4px 12px;
 
     &:hover {
-      background-color: lighten($color: #6135ce, $amount: 10);
+      background-color: lighten($color: #7d1707, $amount: 10);
+    }
+
+    &.selected {
+      background-color: #073c7d;
+      font-weight: 600 !important;
     }
 
     &.group {

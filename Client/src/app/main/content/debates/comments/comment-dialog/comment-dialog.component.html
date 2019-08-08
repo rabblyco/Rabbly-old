@@ -1,9 +1,9 @@
 <p mat-dialog-content>{{ data.text }}</p>
 <div>Reply:</div>
 <form #replyForm="ngForm" (ngSubmit)="submitReply(replyForm)">
-  <textarea class="reply-input" name="reply" ngModel #reply="ngModel"></textarea>
+  <app-editor (onEditorChanged)="logIt($event)"></app-editor>
   <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button type="submit" mat-button (click)="submitReply(replyForm)">Ok</button>
+    <button class="outline primary" mat-button (click)="onNoClick()">Cancel</button>
+    <button class="fill success" type="submit" mat-button (click)="submitReply(replyForm)">Submit</button>
   </div>
 </form>

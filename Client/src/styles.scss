@@ -3,6 +3,8 @@
    v2.0 | 20110126
    License: none (public domain)
 */
+
+@import './assets/css/quill.snow.css';
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import url('https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700&display=swap&subset=latin-ext');
 html,
@@ -39,7 +41,7 @@ s,
 samp,
 small,
 strike,
-strong,
+// strong,
 sub,
 sup,
 tt,
@@ -146,7 +148,7 @@ form {
 
 
 body {
-    font-family: 'Muli', sans-serif;
+    font-family: 'Muli', sans-serif !important;
 
     a {
       color: inherit;
@@ -155,28 +157,95 @@ body {
     *:focus {
       outline-style: none !important;
     }
+
+    strong {
+      font-weight: 600;
+    }
 }
 
 button {
   border-width: 1px;
   border-style: solid;
-  border-radius: .4rem;
+  border-radius: 5px;
   padding: 8px 12px;
-  background-color: #fff;
   outline-style: none !important;
-  color: #6135ce;
   font-weight: 600;
   cursor: pointer;
 
+  &.outline {
+    background-color: #fff;
+    border-color: #eee;
+
+    &.primary {
+      color: #7d1707;
+
+      &:hover {
+        color: #fff;
+        background-color: #7d1707;
+        border-color: #7d1707;
+      }
+    }
+
+    &.secondary {
+      color: #073c7d;
+
+      &:hover {
+        color: #fff;
+        background-color: #073c7d;
+        border-color: #073c7d;
+      }
+    }
+
+    &.success {
+      color: #227d07;
+
+      &:hover {
+        color: #fff;
+        background-color: #227d07;
+        border-color: #227d07;
+      }
+    }
+  }
+
+  &.fill {
+    color: #fff;
+    &.primary {
+      background-color: #7d1707;
+      border-color: #7d1707;
+
+      &:hover {
+        background-color: lighten(#7d1707, .1); 
+      }
+    }
+
+    &.secondary {
+      background-color: #073c7d;
+      border-color: #073c7d;
+
+      &:hover {
+        background-color: lighten(#073c7d, .1); 
+      }
+    }
+
+    &.success {
+      background-color: #227d07;
+      border-color: #227d07;
+
+      &:hover {
+        background-color: lighten(#227d07, .1); 
+      }
+    }
+  }
+
   &:hover {
-    background-color: lighten($color: #6135ce, $amount: 10);
-    border-color: lighten($color: #6135ce, $amount: 10);
+    background-color: lighten($color: #7d1707, $amount: 10);
+    border-color: lighten($color: #7d1707, $amount: 10);
     color: #fff;
   }
 
   &:active {
-    background-color: #6135ce;
-    border-color: #6135ce;
+    background-color: #7d1707;
+    border-color: #7d1707;
     color: #fff;
   }
 }

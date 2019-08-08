@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommentDialogComponent } from './comment-dialog/comment-dialog.component';
 
 @Component({
@@ -19,7 +19,7 @@ export class CommentsComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('closed');
-    })
+    });
   }
 }
 

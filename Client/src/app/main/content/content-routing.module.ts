@@ -6,13 +6,14 @@ import { ProfileComponent } from './profiles/profile/profile.component';
 
 
 const routes: Routes = [
-    { path: 'debate', component: DebateComponent },
-    { path: 'group/:id', component: GroupComponent },
-    { path: 'profile/:id', component: ProfileComponent }
+  { path: 'group', component: GroupComponent },
+  { path: 'group/:id', component: GroupComponent },
+  { path: 'profile', component: ProfileComponent},
+  { path: 'debate/:id', component: DebateComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AuthRoutingModule { }
+export class ContentRoutingModule { }

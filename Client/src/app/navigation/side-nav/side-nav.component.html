@@ -2,9 +2,7 @@
   <div
     [routerLink]="['/profile']"
     class="info-section profile"
-    [ngStyle]="{
-      'background-color': this.currentItem === 'profile' ? '#ce6135' : ''
-    }"
+    [ngClass]="{ 'selected' : this.currentItem === 'profile' }"
   >
     <div class="profile-image">
       <img
@@ -25,9 +23,7 @@
   <div
     [routerLink]="['/group/' + group.id]"
     class="info-section group"
-    [ngStyle]="{
-      'background-color': this.currentItem === group.id ? '#ce6135' : ''
-    }"
+    [ngClass]="{ 'selected' : this.currentItem === group.id }"
     *ngIf="group"
   >
     <div>
@@ -47,9 +43,7 @@
     <div
       class="inner"
       *ngFor="let debate of createdDebates"
-      [ngStyle]="{
-        'background-color': this.currentItem === debate.id ? '#ce6135' : ''
-      }"
+      [ngClass]="{ 'selected' : this.currentItem === debate.id }"
     >
       <div [routerLink]="['/debate/' + debate.id]">{{ debate?.topic }}</div>
     </div>
@@ -59,9 +53,7 @@
     <div
       class="inner"
       *ngFor="let debate of participatingDebates"
-      [ngStyle]="{
-        'background-color': this.currentItem === debate.id ? '#ce6135' : ''
-      }"
+      [ngClass]="{ 'selected' : this.currentItem === debate.id }"
     >
       <div [routerLink]="['/debate/' + debate.id]">{{ debate?.topic }}</div>
     </div>

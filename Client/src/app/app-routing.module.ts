@@ -6,12 +6,13 @@ import { MainModule } from './main/main.module';
 import { GroupComponent } from './main/content/groups/groups/groups.component';
 import { ProfileComponent } from './main/content/profiles/profile/profile.component';
 import { DebateComponent } from './main/content/debates/debate/debate.component';
+import { NotFoundComponent } from './main/content/misc/not-found/not-found.component';
+import { HomeComponent } from './main/content/home/home.component';
 
 const routes: Routes = [
-  { path: 'group', component: GroupComponent },
-  { path: 'group/:id', component: GroupComponent },
-  { path: 'profile', component: ProfileComponent},
-  { path: 'debate/:id', component: DebateComponent }
+  { path: 'not-found', component: NotFoundComponent },
+  { path: '', component: HomeComponent },
+  { path: '**', redirectTo: 'not-found' }
 ];
 
 @NgModule({

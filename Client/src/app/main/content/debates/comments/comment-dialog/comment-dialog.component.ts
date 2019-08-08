@@ -7,7 +7,7 @@ export interface CommentData {
 }
 
 @Component({
-    selector: 'comment-dialog',
+    selector: 'app-comment-dialog',
     templateUrl: './comment-dialog.component.html'
 })
 export class CommentDialogComponent {
@@ -20,5 +20,9 @@ export class CommentDialogComponent {
 
     submitReply(commentForm: NgForm) {
         console.log(commentForm.value);
+    }
+
+    logIt(event) {
+        console.log(event);
     }
 }
