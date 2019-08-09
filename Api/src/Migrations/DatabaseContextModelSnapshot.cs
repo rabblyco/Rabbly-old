@@ -434,11 +434,17 @@ namespace Api.Migrations
 
                     b.OwnsOne("RabblyApi.Profiles.Models.Profile", "Profile", b1 =>
                         {
-                            b1.Property<string>("UserId");
+                            b1.Property<string>("Id")
+                                .ValueGeneratedOnAdd();
 
                             b1.Property<string>("Country")
                                 .ValueGeneratedOnAdd()
                                 .HasDefaultValue("None");
+
+                            b1.Property<DateTime>("CreatedAt")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("timestamp with time zone")
+                                .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                             b1.Property<decimal>("EconomicCoordinate");
 
@@ -456,11 +462,16 @@ namespace Api.Migrations
                                 .ValueGeneratedOnAdd()
                                 .HasDefaultValue("None");
 
+                            b1.Property<DateTime>("UpdatedAt")
+                                .ValueGeneratedOnAddOrUpdate()
+                                .HasColumnType("timestamp with time zone")
+                                .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
                             b1.Property<string>("Username");
 
                             b1.Property<string>("ZipCode");
 
-                            b1.HasKey("UserId");
+                            b1.HasKey("Id");
 
                             b1.HasIndex("Username")
                                 .IsUnique();
@@ -469,7 +480,7 @@ namespace Api.Migrations
 
                             b1.HasOne("RabblyApi.Users.Models.User", "User")
                                 .WithOne("Profile")
-                                .HasForeignKey("RabblyApi.Profiles.Models.Profile", "UserId")
+                                .HasForeignKey("RabblyApi.Profiles.Models.Profile", "Id")
                                 .OnDelete(DeleteBehavior.Cascade);
                         });
                 });

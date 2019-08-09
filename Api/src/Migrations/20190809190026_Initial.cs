@@ -12,11 +12,11 @@ namespace Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
                     Topic = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    CreatedById = table.Column<string>(nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
+                    CreatedById = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -28,6 +28,8 @@ namespace Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
                     Opinion = table.Column<int>(nullable: false),
                     AdHominem = table.Column<int>(nullable: false),
@@ -54,8 +56,6 @@ namespace Api.Migrations
                     Anecdotal = table.Column<int>(nullable: false),
                     CherryPick = table.Column<int>(nullable: false),
                     MiddleGround = table.Column<int>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
                     CommentId = table.Column<string>(nullable: true),
                     DebateId = table.Column<string>(nullable: true),
                     PollId = table.Column<string>(nullable: true)
@@ -76,12 +76,12 @@ namespace Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
                     Text = table.Column<string>(nullable: true),
                     DebateId = table.Column<string>(nullable: true),
                     CreatedById = table.Column<string>(nullable: true),
-                    ParentId = table.Column<string>(nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
+                    ParentId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -105,9 +105,13 @@ namespace Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
                     Title = table.Column<string>(nullable: true),
                     Level = table.Column<int>(nullable: false),
                     GroupId = table.Column<string>(nullable: true),
+                    Permissions_UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    Permissions_CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
                     Permissions_CanCreateRole = table.Column<bool>(nullable: false, defaultValue: false),
                     Permissions_CanCreateDiscussion = table.Column<bool>(nullable: false, defaultValue: false),
                     Permissions_CanAddMember = table.Column<bool>(nullable: false, defaultValue: false),
@@ -118,11 +122,7 @@ namespace Api.Migrations
                     Permissions_CanRemoveMember = table.Column<bool>(nullable: false, defaultValue: false),
                     Permissions_CanRemoveRank = table.Column<bool>(nullable: false, defaultValue: false),
                     Permissions_CanRepresentGroup = table.Column<bool>(nullable: false, defaultValue: false),
-                    Permissions_CanParticipateInGroupDiscussion = table.Column<bool>(nullable: false, defaultValue: false),
-                    Permissions_UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    Permissions_CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
+                    Permissions_CanParticipateInGroupDiscussion = table.Column<bool>(nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -134,9 +134,13 @@ namespace Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
                     Email = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: true),
                     RankId = table.Column<string>(nullable: true),
+                    Profile_UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    Profile_CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
                     Profile_Username = table.Column<string>(nullable: true),
                     Profile_Gender = table.Column<string>(nullable: true, defaultValue: "Secret"),
                     Profile_ImageUrl = table.Column<string>(nullable: true),
@@ -147,8 +151,6 @@ namespace Api.Migrations
                     Profile_SocialCoordinate = table.Column<decimal>(nullable: false),
                     Profile_EconomicCoordinate = table.Column<decimal>(nullable: false),
                     GroupId = table.Column<string>(nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
                     GroupId1 = table.Column<string>(nullable: true),
                     RankId1 = table.Column<string>(nullable: true)
                 },
@@ -174,12 +176,12 @@ namespace Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
                     Name = table.Column<string>(nullable: true),
                     Bio = table.Column<string>(nullable: true),
                     LogoUrl = table.Column<string>(nullable: true),
-                    OwnerId = table.Column<string>(nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
+                    OwnerId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -197,10 +199,10 @@ namespace Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    Topic = table.Column<string>(nullable: true),
-                    CreatedById = table.Column<string>(nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    Topic = table.Column<string>(nullable: true),
+                    CreatedById = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

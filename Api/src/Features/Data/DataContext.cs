@@ -60,7 +60,9 @@ namespace RabblyApi.Data
             builder.Entity<Profile>().Property(p => p.Country).HasConversion(c => c.ToString(), c => (Countries)Enum.Parse(typeof(Countries), c)).HasDefaultValue(Countries.None);
             builder.Entity<Profile>().Property(p => p.State).HasConversion(s => s.ToString(), s => (States)Enum.Parse(typeof(States), s)).HasDefaultValue(States.None);
             builder.Entity<Profile>().Property(p => p.Gender).HasConversion(g => g.ToString(), g => (Gender)Enum.Parse(typeof(Gender), g)).HasDefaultValue(Gender.Secret);
-
+            builder.Entity<Profile>().Property(p => p.CreatedAt).ValueGeneratedOnAdd().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Entity<Profile>().Property(p => p.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            
             // Group
             builder.Entity<Group>().HasKey(g => g.Id);
             builder.Entity<Group>().HasMany(g => g.Users);

@@ -3,7 +3,7 @@
         <a class="home-link" routerLink="/">Rabbly</a>
     </div>
     <div class="left" *ngIf="!authed; else notAuthed">
-        <button class="auth" routerLink="/auth/login">Login</button>
+        <button class="fill secondary" routerLink="/auth/login">Login</button>
     </div>
     <ng-template  #notAuthed>
         <div class="left">

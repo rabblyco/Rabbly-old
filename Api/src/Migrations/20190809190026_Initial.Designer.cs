@@ -10,7 +10,7 @@ using RabblyApi.Data;
 namespace Api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20190728191215_Initial")]
+    [Migration("20190809190026_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace Api.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("RabblyApi.Comments.Models.Comment", b =>
@@ -329,7 +329,8 @@ namespace Api.Migrations
 
                     b.OwnsOne("RabblyApi.Permissions.Models.Permission", "Permissions", b1 =>
                         {
-                            b1.Property<string>("Id");
+                            b1.Property<string>("Id")
+                                .ValueGeneratedOnAdd();
 
                             b1.Property<bool>("CanAddMember")
                                 .ValueGeneratedOnAdd()
@@ -435,11 +436,17 @@ namespace Api.Migrations
 
                     b.OwnsOne("RabblyApi.Profiles.Models.Profile", "Profile", b1 =>
                         {
-                            b1.Property<string>("UserId");
+                            b1.Property<string>("Id")
+                                .ValueGeneratedOnAdd();
 
                             b1.Property<string>("Country")
                                 .ValueGeneratedOnAdd()
                                 .HasDefaultValue("None");
+
+                            b1.Property<DateTime>("CreatedAt")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("timestamp with time zone")
+                                .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                             b1.Property<decimal>("EconomicCoordinate");
 
@@ -457,11 +464,16 @@ namespace Api.Migrations
                                 .ValueGeneratedOnAdd()
                                 .HasDefaultValue("None");
 
+                            b1.Property<DateTime>("UpdatedAt")
+                                .ValueGeneratedOnAddOrUpdate()
+                                .HasColumnType("timestamp with time zone")
+                                .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
                             b1.Property<string>("Username");
 
                             b1.Property<string>("ZipCode");
 
-                            b1.HasKey("UserId");
+                            b1.HasKey("Id");
 
                             b1.HasIndex("Username")
                                 .IsUnique();
@@ -470,7 +482,7 @@ namespace Api.Migrations
 
                             b1.HasOne("RabblyApi.Users.Models.User", "User")
                                 .WithOne("Profile")
-                                .HasForeignKey("RabblyApi.Profiles.Models.Profile", "UserId")
+                                .HasForeignKey("RabblyApi.Profiles.Models.Profile", "Id")
                                 .OnDelete(DeleteBehavior.Cascade);
                         });
                 });

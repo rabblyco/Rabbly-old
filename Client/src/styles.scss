@@ -6,7 +6,7 @@
 
 @import './assets/css/quill.snow.css';
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-@import url('https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700&display=swap&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,400i,600,700&display=swap');
 html,
 body,
 div,
@@ -32,7 +32,7 @@ cite,
 code,
 del,
 dfn,
-em,
+// em,
 img,
 ins,
 kbd,
@@ -42,13 +42,13 @@ samp,
 small,
 strike,
 // strong,
-sub,
-sup,
+// sub,
+// sup,
 tt,
 var,
 b,
 u,
-// i,
+i,
 center,
 dl,
 dt,
@@ -148,7 +148,7 @@ form {
 
 
 body {
-    font-family: 'Muli', sans-serif !important;
+    font-family: 'Nunito', sans-serif !important;
 
     a {
       color: inherit;
@@ -166,7 +166,7 @@ body {
 button {
   border-width: 1px;
   border-style: solid;
-  border-radius: 5px;
+  border-radius: .375rem;
   padding: 8px 12px;
   outline-style: none !important;
   font-weight: 600;
@@ -174,25 +174,26 @@ button {
 
   &.outline {
     background-color: #fff;
-    border-color: #eee;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 8px 3px rgba(98, 98, 98, .33);
 
     &.primary {
-      color: #593a37;
+      color: #443eff;
 
       &:hover {
         color: #fff;
-        background-color: #593a37;
-        border-color: #593a37;
+        background-color: #443eff;
+        border-color: #443eff;
       }
     }
 
     &.secondary {
-      color: #374d59;
+      color: #ffa23e;
 
       &:hover {
         color: #fff;
-        background-color: #374d59;
-        border-color: #374d59;
+        background-color: #ffa23e;
+        border-color: #ffa23e;
       }
     }
 
@@ -205,25 +206,30 @@ button {
         border-color: #425937;
       }
     }
+
+    &:active {
+      box-shadow: 0 1px 6px 1px rgba(98, 98, 98, .33);
+    }
   }
 
   &.fill {
     color: #fff;
     &.primary {
-      background-color: #593a37;
-      border-color: #593a37;
+      background-color: #443eff;
+      border-color: #443eff;
 
       &:hover {
-        background-color: lighten(#593a37, .1); 
+        background-color: lighten(#443eff, 3); 
       }
     }
 
     &.secondary {
-      background-color: #374d59;
-      border-color: #374d59;
+      background-color: #ffa23e;
+      border-color: #ffa23e;
+      color: #121212;
 
       &:hover {
-        background-color: lighten(#374d59, .1); 
+        background-color: lighten(#ffa23e, 3); 
       }
     }
 
@@ -232,26 +238,14 @@ button {
       border-color: #425937;
 
       &:hover {
-        background-color: lighten(#425937, 2.5); 
+        background-color: lighten(#425937, .2); 
       }
     }
-  }
-
-  &:hover {
-    background-color: lighten($color: #593a37, $amount: 10);
-    border-color: lighten($color: #593a37, $amount: 10);
-    color: #fff;
-  }
-
-  &:active {
-    background-color: #593a37;
-    border-color: #593a37;
-    color: #fff;
   }
 }
 
 .advert {
-  background-color: blue;
+  background-color: #3eff4b;
   color: white;
 
   &.advert-side-large {
@@ -283,10 +277,23 @@ button {
 
 .mat-dialog-container {
   border-radius: 0 !important;
+  min-height: 256px !important;
+  padding: 16px !important;
+  position: relative;
 
   .mat-dialog-content {
     margin: 0 !important;
     padding: 0 !important;
+    min-height: 24px;
+  }
+
+  .ql-editor {
+    min-height: 112px;
+  }
+
+  .comment-form {
+    height: 100%;
+    padding-bottom: 40px;
   }
 
   .reply-input {
@@ -296,6 +303,12 @@ button {
 
   .mat-dialog-actions {
     justify-content: flex-end !important;
+    align-items: flex-end !important;
+    padding: 0 !important;
+    position: absolute;
+    bottom: 40px;
+    right: 16px;
+    min-height: 36px !important;
 
     button {
       margin-left: 4px !important;
