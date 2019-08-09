@@ -48,7 +48,7 @@ tt,
 var,
 b,
 u,
-i,
+// i,
 center,
 dl,
 dt,
@@ -181,8 +181,8 @@ button {
 
       &:hover {
         color: #fff;
-        background-color: #7d1707;
-        border-color: #7d1707;
+        background-color: #2e0a07;
+        border-color: #2e0a07;
       }
     }
 
@@ -191,18 +191,18 @@ button {
 
       &:hover {
         color: #fff;
-        background-color: #073c7d;
-        border-color: #073c7d;
+        background-color: #0d072e;
+        border-color: #0d072e;
       }
     }
 
     &.success {
-      color: #227d07;
+      color: #072e13;
 
       &:hover {
         color: #fff;
-        background-color: #227d07;
-        border-color: #227d07;
+        background-color: #072e13;
+        border-color: #072e13;
       }
     }
   }
@@ -210,48 +210,48 @@ button {
   &.fill {
     color: #fff;
     &.primary {
-      background-color: #7d1707;
-      border-color: #7d1707;
+      background-color: #2e0a07;
+      border-color: #2e0a07;
 
       &:hover {
-        background-color: lighten(#7d1707, .1); 
+        background-color: lighten(#2e0a07, .1); 
       }
     }
 
     &.secondary {
-      background-color: #073c7d;
-      border-color: #073c7d;
+      background-color: #0d072e;
+      border-color: #0d072e;
 
       &:hover {
-        background-color: lighten(#073c7d, .1); 
+        background-color: lighten(#0d072e, .1); 
       }
     }
 
     &.success {
-      background-color: #227d07;
-      border-color: #227d07;
+      background-color: #072e13;
+      border-color: #072e13;
 
       &:hover {
-        background-color: lighten(#227d07, .1); 
+        background-color: lighten(#072e13, .1); 
       }
     }
   }
 
   &:hover {
-    background-color: lighten($color: #7d1707, $amount: 10);
-    border-color: lighten($color: #7d1707, $amount: 10);
+    background-color: lighten($color: #2e0a07, $amount: 10);
+    border-color: lighten($color: #2e0a07, $amount: 10);
     color: #fff;
   }
 
   &:active {
-    background-color: #7d1707;
-    border-color: #7d1707;
+    background-color: #2e0a07;
+    border-color: #2e0a07;
     color: #fff;
   }
 }
 
 .advert {
-  background-color: red;
+  background-color: blue;
   color: white;
 
   &.advert-side-large {
@@ -270,6 +270,14 @@ button {
       width: 728px;
       margin: 0 auto;
   }
+}
+
+.form-container {
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
 }
 
 

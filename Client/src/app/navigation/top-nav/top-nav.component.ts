@@ -22,7 +22,7 @@ export class TopNavComponent implements OnDestroy {
   public logout() {
     localStorage.removeItem('token');
     this.store.dispatch(new Logout());
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/']);
   }
 
   ngOnDestroy(): void {

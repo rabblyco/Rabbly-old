@@ -3,7 +3,7 @@
     max-width: 100vw;
     position: fixed;
     height: 56px;
-    background-color: #7d1707;
+    background-color: #2e0a07;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -28,14 +28,14 @@
     .auth {
         border: none;
         border-radius: 5px;
-        background-color: #073c7d;
+        background-color: #0d072e;
         color: #fff;
         font-size: 14px;
         font-weight: 500;
 
         &:hover {
             cursor: pointer;
-            background-color: lighten($color: #073c7d, $amount: 10)
+            background-color: lighten($color: #0d072e, $amount: 10)
         }
 
         &:focus {

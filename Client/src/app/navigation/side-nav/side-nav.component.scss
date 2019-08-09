@@ -21,7 +21,7 @@
       cursor: pointer;
 
       &:hover {
-        background-color: lighten($color: #7d1707, $amount: 10);
+        background-color: lighten($color: #2e0a07, $amount: 10);
       }
 
       &.selected {
@@ -37,7 +37,7 @@
     padding: 4px 12px 4px 12px;
 
     &:hover {
-      background-color: lighten($color: #7d1707, $amount: 10);
+      background-color: lighten($color: #2e0a07, $amount: 10);
     }
 
     &.selected {
