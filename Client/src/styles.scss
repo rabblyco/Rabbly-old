@@ -177,32 +177,32 @@ button {
     border-color: #eee;
 
     &.primary {
-      color: #7d1707;
+      color: #593a37;
 
       &:hover {
         color: #fff;
-        background-color: #2e0a07;
-        border-color: #2e0a07;
+        background-color: #593a37;
+        border-color: #593a37;
       }
     }
 
     &.secondary {
-      color: #073c7d;
+      color: #374d59;
 
       &:hover {
         color: #fff;
-        background-color: #0d072e;
-        border-color: #0d072e;
+        background-color: #374d59;
+        border-color: #374d59;
       }
     }
 
     &.success {
-      color: #072e13;
+      color: #425937;
 
       &:hover {
         color: #fff;
-        background-color: #072e13;
-        border-color: #072e13;
+        background-color: #425937;
+        border-color: #425937;
       }
     }
   }
@@ -210,42 +210,42 @@ button {
   &.fill {
     color: #fff;
     &.primary {
-      background-color: #2e0a07;
-      border-color: #2e0a07;
+      background-color: #593a37;
+      border-color: #593a37;
 
       &:hover {
-        background-color: lighten(#2e0a07, .1); 
+        background-color: lighten(#593a37, .1); 
       }
     }
 
     &.secondary {
-      background-color: #0d072e;
-      border-color: #0d072e;
+      background-color: #374d59;
+      border-color: #374d59;
 
       &:hover {
-        background-color: lighten(#0d072e, .1); 
+        background-color: lighten(#374d59, .1); 
       }
     }
 
     &.success {
-      background-color: #072e13;
-      border-color: #072e13;
+      background-color: #425937;
+      border-color: #425937;
 
       &:hover {
-        background-color: lighten(#072e13, .1); 
+        background-color: lighten(#425937, 2.5); 
       }
     }
   }
 
   &:hover {
-    background-color: lighten($color: #2e0a07, $amount: 10);
-    border-color: lighten($color: #2e0a07, $amount: 10);
+    background-color: lighten($color: #593a37, $amount: 10);
+    border-color: lighten($color: #593a37, $amount: 10);
     color: #fff;
   }
 
   &:active {
-    background-color: #2e0a07;
-    border-color: #2e0a07;
+    background-color: #593a37;
+    border-color: #593a37;
     color: #fff;
   }
 }

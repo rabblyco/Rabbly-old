@@ -21,11 +21,11 @@
       cursor: pointer;
 
       &:hover {
-        background-color: lighten($color: #2e0a07, $amount: 10);
+        background-color: lighten($color: #593a37, $amount: 10);
       }
 
       &.selected {
-        background-color: #073c7d;
+        background-color: #374d59;
         font-weight: 600 !important;
       }
     }
@@ -37,11 +37,11 @@
     padding: 4px 12px 4px 12px;
 
     &:hover {
-      background-color: lighten($color: #2e0a07, $amount: 10);
+      background-color: lighten($color: #593a37, $amount: 10);
     }
 
     &.selected {
-      background-color: #073c7d;
+      background-color: #374d59;
       font-weight: 600 !important;
     }
 
