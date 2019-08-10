@@ -149,6 +149,11 @@ form {
 
 body {
     font-family: 'Nunito', sans-serif !important;
+    font-size: 16px;
+
+    * {
+      font-family: 'Nunito', sans-serif;
+    }
 
     a {
       color: inherit;
@@ -167,13 +172,27 @@ button {
   border-width: 1px;
   border-style: solid;
   border-radius: .375rem;
-  padding: 8px 12px;
+  padding: 6px 10px;
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
   outline-style: none !important;
   font-weight: 600;
   cursor: pointer;
 
+  &.circle {
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &.outline {
     background-color: #fff;
+    color: #404040;
     border: 1px solid transparent;
     box-shadow: 0 1px 8px 3px rgba(98, 98, 98, .33);
 
@@ -214,22 +233,23 @@ button {
 
   &.fill {
     color: #fff;
+    box-shadow: 0 1px 8px 3px rgba(98, 98, 98, .33);
     &.primary {
       background-color: #443eff;
       border-color: #443eff;
 
       &:hover {
-        background-color: lighten(#443eff, 3); 
+        background-color: lighten(#443eff, 5); 
       }
     }
 
     &.secondary {
       background-color: #ffa23e;
       border-color: #ffa23e;
-      color: #121212;
+      color: #404040;
 
       &:hover {
-        background-color: lighten(#ffa23e, 3); 
+        background-color: lighten(#ffa23e, 5); 
       }
     }
 
@@ -241,7 +261,15 @@ button {
         background-color: lighten(#425937, .2); 
       }
     }
+
+    &:active {
+      box-shadow: 0 1px 6px 1px rgba(98, 98, 98, .33);
+    }
   }
+}
+
+.rabbly-tooltip {
+  background-color: #404040;
 }
 
 .advert {
@@ -311,7 +339,7 @@ button {
     min-height: 36px !important;
 
     button {
-      margin-left: 4px !important;
+      margin-left: 8px !important;
     }
   }
 }

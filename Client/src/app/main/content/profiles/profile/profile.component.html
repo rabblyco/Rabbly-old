@@ -2,12 +2,21 @@
   Advertisement
 </div>
 <div *ngIf="profile" class="profile">
-  <img
-    height="112px;"
-    width="112px;"
-    [src]="profile.imageUrl || '/assets/images/default-user.svg'"
-    alt="Profile picture"
-  />
+  <div class="profile-row">
+    <div style="display: flex; flex-direction: column; justify-content: center; font-size: 12px;">
+        <div>Joined: <span style="color: #443eff">{{ profile?.createdAt | amTimeAgo }}</span></div>
+        <div>Updated: <span style="color: #443eff">{{ profile?.updatedAt | amTimeAgo }}</span></div>
+    </div>
+    <div>
+        <img
+        height="112px;"
+        width="112px;"
+        [src]="profile.imageUrl || '/assets/images/default-user.svg'"
+        alt="Profile picture"
+      />
+    </div>
+  </div>
+
   <div class="profile-row">
     <div class="title">Username:</div>
     <div class="value">{{ profile?.username }}</div>

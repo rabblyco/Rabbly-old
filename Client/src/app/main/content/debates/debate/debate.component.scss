@@ -1,52 +1,73 @@
 .debate {
-  width: 100%;
   margin-top: 2px;
 
   .debate-card {
     display: flex;
-    border: 1px solid grey;
+    box-shadow: 0 1px 8px 3px rgba(98, 98, 98, .33);
     flex-direction: row;
-    min-height: 112px;
+    min-height: 192px;
     font-size: 14px;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
+    width: calc(100% - 336px);
 
-    .info {
-      border-right: 1px solid grey;
+    &:hover {
+      box-shadow: 0 1px 8px 1px rgba(98, 98, 98, .33);
+    }
+
+    .actions {
+      border-right: 1px solid #ddd;
       font-size: 12px;
       padding: 8px;
-      min-width: 198px;
-      max-width: 288px;
+      width: 40px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
+      align-items: center;
 
-      .created {
-        display: flex;
-        justify-content: space-between;
-      }
-      .edited {
-        display: flex;
-        justify-content: space-between;
-      }
-
-      .score-card-button {
-        text-align: center;
+      button {
+        margin: 4px auto;
       }
     }
 
     .main {
-      padding: 8px;
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+
+      .info {
+        cursor: default;
+        font-size: 12px;
+        min-height: 40px;
+        border-bottom: 1px solid #ddd;
+        width: 100%;
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0px 4px;
+      }
+
+      .body {
+        height: 100%;
+        .topic {
+          min-height: 112px;
+        }
+
+        .description {
+          min-height: 112px;
+        }
+      }
     }
   }
 }
 
 :host {
-  width: calc(100% - 336px);
+  width: 100%;
 }
 
 .advert-side-medium {
     position: absolute;
-    top: 0;
+    top: 12px;
     right: 0;
     width: 336px;
     height: 280px;
@@ -55,6 +76,11 @@
 @media screen and (max-width: 1200px) {
   .advert-side-medium {
     display: none;
+  }
+
+  .debate-card {
+    width: 100% !important;
+    margin-top: 8px;
   }
 
   :host {

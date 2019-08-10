@@ -1,5 +1,29 @@
-.comment {
-    padding-left: 8px;
+.comment-card {
+    display: flex;
+    box-shadow: 0 1px 8px 3px rgba(98, 98, 98, .33);
+    flex-direction: row;
+    min-height: 192px;
+    font-size: 14px;
+    margin: 0 0 12px 8px;
+
+    &:hover {
+        box-shadow: 0 1px 8px 1px rgba(98, 98, 98, .33);
+    }
+    
+    .actions {
+        border-right: 1px solid #ddd;
+        font-size: 12px;
+        padding: 8px;
+        width: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        button {
+            margin: 4px auto;
+        }
+      }
 
     .comment-btn {
         margin: 4px 0px;

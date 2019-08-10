@@ -31,6 +31,29 @@ export class DebateComponent implements OnInit {
     return false;
   }
 
-  ngOnInit() { }
+  get currentUserId(): string {
+    const token = localStorage.getItem('token')
+    const decodedToken = JSON.parse(atob(token.split('.')[1]));
+    return decodedToken.sub;
+  }
+
+  get canEdit(): boolean {
+    if(this.debate) {
+      const isSameUser = this.debate.createdById === this.currentUserId;
+      const createdLessThanAnHourAgo = (Date.now() - 1000 * 60 * 60) < new Date(this.debate.createdAt).getTime();
+      if(isSameUser && createdLessThanAnHourAgo)
+      {
+        return true;
+      }
+      return false;
+    }
+    return false;
+  }
+
+  ngOnInit() {
+    const token = localStorage.getItem('token')
+    const decodedToken = JSON.parse(atob(token.split('.')[1]));
+    console.log(decodedToken);
+  }
 
 }

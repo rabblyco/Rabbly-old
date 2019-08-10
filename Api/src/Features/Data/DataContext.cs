@@ -25,14 +25,7 @@ namespace RabblyApi.Data
         {
             _config = config;
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            // optionsBuilder.EnableSensitiveDataLogging();
-            // if (optionsBuilder.IsConfigured)
-            // {
-            //     optionsBuilder.UseNpgsql(_config.GetConnectionString("Default"));
-            // }
-        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Profile> Profiles { get; set; }
@@ -119,6 +112,10 @@ namespace RabblyApi.Data
             builder.Entity<Permission>().Property(p => p.CanRepresentGroup).HasDefaultValue(false);
             builder.Entity<Permission>().Property(p => p.CreatedAt).ValueGeneratedOnAdd().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
             builder.Entity<Permission>().Property(p => p.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
+        
+            builder.Entity<ScoreCard>().HasKey(sc => sc.Id);
+            builder.Entity<ScoreCard>().Property(sc => sc.CreatedAt).ValueGeneratedOnAdd().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Entity<ScoreCard>().Property(sc => sc.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
         }
     }
 }

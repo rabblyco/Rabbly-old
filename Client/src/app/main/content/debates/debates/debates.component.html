@@ -1,3 +1,10 @@
-<p>
-  debates works!
-</p>
+<div class="card-container">
+  <div [routerLink]="['/debate/' + debate.id]" class="card" *ngFor="let debate of debates">
+    <div class="topic">
+      {{ debate?.topic }}
+    </div>
+    <div class="description">
+      {{ debate?.description }}
+    </div>
+  </div>
+</div>

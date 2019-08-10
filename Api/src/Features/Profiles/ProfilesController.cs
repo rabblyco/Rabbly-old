@@ -25,6 +25,10 @@ namespace RabblyApi.Profiles.Controllers
         public async Task<ActionResult<Profile>> GetUserProfile()
         {
             var email = HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Email).FirstOrDefault().Value;
+            if(email == null)
+            {
+                email = HttpContext.User.Claims.Where(c => c.Type == "email").FirstOrDefault().Value;
+            }
             var profile = await _profileService.GetProfile(email);
             if (profile == null)
             {
@@ -37,6 +41,10 @@ namespace RabblyApi.Profiles.Controllers
         public async Task<ActionResult<Profile>> EditUserProfile(ProfileEditDto profileToEdit)
         {
             var email = HttpContext.User.Claims.Where(c => c.Type == ClaimTypes.Email).FirstOrDefault().Value;
+            if(email == null)
+            {
+                email = HttpContext.User.Claims.Where(c => c.Type == "email").FirstOrDefault().Value;
+            }
             var profile = await _profileService.EditProfile(email, profileToEdit);
             if (profile == null)
             {
