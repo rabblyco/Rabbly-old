@@ -113,6 +113,7 @@ namespace RabblyApi.Data
             builder.Entity<Permission>().Property(p => p.CreatedAt).ValueGeneratedOnAdd().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
             builder.Entity<Permission>().Property(p => p.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
         
+            // ScoreCards   
             builder.Entity<ScoreCard>().HasKey(sc => sc.Id);
             builder.Entity<ScoreCard>().Property(sc => sc.CreatedAt).ValueGeneratedOnAdd().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
             builder.Entity<ScoreCard>().Property(sc => sc.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
