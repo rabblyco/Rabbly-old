@@ -16,6 +16,16 @@ import { authReducer } from './store/reducers/auth.reducer';
 import { groupReducer } from './store/reducers/group.reducer';
 import { profileReducer } from './store/reducers/profile.reducer';
 import { debateReducer } from './store/reducers/debate.reducer';
+import {
+  PerfectScrollbarModule,
+  PerfectScrollbarConfigInterface,
+  PERFECT_SCROLLBAR_CONFIG
+} from "ngx-perfect-scrollbar";
+
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 @NgModule({
   declarations: [
@@ -29,12 +39,16 @@ import { debateReducer } from './store/reducers/debate.reducer';
     NavigationModule,
     MatSidenavModule,
     AppRoutingModule,
+    PerfectScrollbarModule,
     StoreModule.forRoot({ auth: authReducer, profile: profileReducer, group: groupReducer, debate: debateReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
     }),
   ],
-  providers: [],
+  providers: [{
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

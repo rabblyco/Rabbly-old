@@ -16,7 +16,7 @@ import { NotFoundComponent } from './misc/not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { QuillModule } from 'ngx-quill';
 import { EditorComponent } from './debates/editor/editor.component';
-import { MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -38,6 +38,7 @@ import { MatTooltipModule} from '@angular/material/tooltip';
     MatDialogModule,
     MatTooltipModule,
     FormsModule,
+
     QuillModule.forRoot({
       theme: 'snow'
     })

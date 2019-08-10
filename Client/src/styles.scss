@@ -279,12 +279,21 @@ button {
   &.advert-side-large {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 12px;
     height: 600px;
     width: 300px;
     text-align: center;
-    writing-mode: vertical-rl;
   }
+
+  &.advert-side-medium {
+    position: absolute;
+    bottom: 28px;
+    right: 12px;
+    height: 250px;
+    width: 300px;
+    text-align: center;
+  }
+  
 
   &.advert-top {
       display: none;

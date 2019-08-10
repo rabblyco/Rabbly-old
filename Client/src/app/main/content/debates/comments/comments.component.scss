@@ -5,6 +5,7 @@
     min-height: 192px;
     font-size: 14px;
     margin: 0 0 12px 8px;
+    width: calc(100% - 316px);
 
     &:hover {
         box-shadow: 0 1px 8px 1px rgba(98, 98, 98, .33);

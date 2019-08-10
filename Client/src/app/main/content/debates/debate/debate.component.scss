@@ -7,8 +7,9 @@
     flex-direction: row;
     min-height: 192px;
     font-size: 14px;
-    margin-bottom: 12px;
-    width: calc(100% - 336px);
+    margin-bottom: 24px;
+    margin-left: 4px;
+    width: calc(100% - 312px);
 
     &:hover {
       box-shadow: 0 1px 8px 1px rgba(98, 98, 98, .33);
@@ -62,24 +63,21 @@
 }
 
 :host {
-  width: 100%;
+  width: calc(100% - 12px);
 }
 
-.advert-side-medium {
-    position: absolute;
-    top: 12px;
-    right: 0;
-    width: 336px;
-    height: 280px;
+.advert-side-large {
+  float: right;
 }
+
 
 @media screen and (max-width: 1200px) {
-  .advert-side-medium {
+  .advert-side-large {
     display: none;
   }
 
   .debate-card {
-    width: 100% !important;
+    width: calc(100% - 16px) !important;
     margin-top: 8px;
   }
 

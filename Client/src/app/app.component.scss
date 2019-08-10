@@ -12,7 +12,7 @@
     }
 
     .mat-drawer-content {
-        padding: 24px 8px 12px 8px;
+        padding: 24px 0 8px 8px;
         .toggler {
             position: absolute;
             top: 3px;
@@ -28,7 +28,6 @@
         }
 
         .main {
-            padding: 0;
             display: flex;
             width: 100%;
 

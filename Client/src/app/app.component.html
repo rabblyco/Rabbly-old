@@ -1,24 +1,15 @@
 <app-top-nav></app-top-nav>
 <mat-sidenav-container>
-  <mat-sidenav
-    #sideNav
-    mode="side"
-    [(opened)]="opened"
-    (openedStart)="setState()"
-    (closedStart)="setState()"
-  >
+  <mat-sidenav #sideNav mode="side" [(opened)]="opened" (openedStart)="setState()" (closedStart)="setState()">
     <app-side-nav></app-side-nav>
   </mat-sidenav>
   <mat-sidenav-content>
-    <i
-      class="material-icons toggler"
-      (click)="sideNav.toggle()"
-      [@openClose]="openingState ? 'opened' : 'closed'"
-      [ngStyle]="{ display: authed ? 'initial' : 'none' }"
-      >chevron_left</i
-    >
-    <div class="main">
-      <router-outlet class="outlet"></router-outlet>
-    </div>
+    <i class="material-icons toggler" (click)="sideNav.toggle()" [@openClose]="openingState ? 'opened' : 'closed'"
+      [ngStyle]="{ display: authed ? 'initial' : 'none' }">chevron_left</i>
+      <perfect-scrollbar>
+          <div class="main">
+              <router-outlet></router-outlet>
+            </div>
+      </perfect-scrollbar>
   </mat-sidenav-content>
 </mat-sidenav-container>
