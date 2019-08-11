@@ -1,4 +1,8 @@
-<div mat-dialog-content>{{ data.text }}</div>
+<div mat-dialog-content>
+  <perfect-scrollbar>
+    <div style="padding-right: 12px">{{ data.text }}</div>
+</perfect-scrollbar>
+</div>
 <form class="comment-form" #replyForm="ngForm" (ngSubmit)="submitReply(replyForm)">
   <app-editor (onEditorChanged)="logIt($event)"></app-editor>
   <div mat-dialog-actions>

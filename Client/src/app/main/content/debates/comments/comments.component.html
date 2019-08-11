@@ -1,11 +1,11 @@
 <div class="comment-card">
     <div class="actions">
         <button class="fill primary circle" matTooltip="Reply to this comment" matTooltipClass="rabbly-tooltip"
-            aria-label="Reply to this comment." (click)="openDialog()">
+            aria-label="Reply to this comment." (click)="openCommentDialog()">
             <i class="material-icons">add</i>
         </button>
         <button class="fill secondary circle" matTooltip="Grade this comment" matTooltipClass="rabbly-tooltip"
-            aria-label="Use this to judge the comment's creator on their rhetoric.">
+            aria-label="Use this to judge the comment's creator on their rhetoric." (click)="openScoreCardDialog()">
             <i class="material-icons">ballot</i>
         </button>
         <button class="outline primary circle" matTooltip="Comment Information" matTooltipClass="rabbly-tooltip"

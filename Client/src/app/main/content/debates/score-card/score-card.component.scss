@@ -1,0 +1,18 @@
+.fallacies {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding-bottom: 52px;
+
+    .fallacy-set {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 686px) {
+    .fallacies {
+        justify-content: start !important;
+    }
+}

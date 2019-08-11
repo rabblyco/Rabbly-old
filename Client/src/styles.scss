@@ -315,8 +315,10 @@ button {
 .mat-dialog-container {
   border-radius: 0 !important;
   min-height: 256px !important;
+  min-width: 256px !important;
   padding: 16px !important;
   position: relative;
+  max-height: 90vh !important;
 
   .mat-dialog-content {
     margin: 0 !important;
@@ -331,12 +333,21 @@ button {
   .comment-form {
     height: 100%;
     padding-bottom: 40px;
+    margin-top: 8px;
   }
 
   .reply-input {
     width: 100%;
     min-height: 112px;
   }
+
+  .checkbox {
+    &.mat-checkbox-checked {
+        .mat-checkbox-background {
+            background-color: #443eff !important;
+        }
+    }
+}
 
   .mat-dialog-actions {
     justify-content: flex-end !important;

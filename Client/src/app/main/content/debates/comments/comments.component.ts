@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CommentDialogComponent } from './comment-dialog/comment-dialog.component';
+import { ScoreCardComponent } from '../score-card/score-card.component';
 
 @Component({
   selector: 'app-comments',
@@ -12,9 +13,19 @@ export class CommentsComponent {
   @Input() comment: Comment;
   constructor(public dialog: MatDialog) { }
 
-  openDialog(): void {
+  openCommentDialog(): void {
     const dialogRef = this.dialog.open(CommentDialogComponent, {
       data: { text: this.comment.text }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('closed');
+    });
+  }
+
+  openScoreCardDialog(): void {
+    const dialogRef = this.dialog.open(ScoreCardComponent, {
+      data: { commentText: this.comment.text }
     });
 
     dialogRef.afterClosed().subscribe(result => {
