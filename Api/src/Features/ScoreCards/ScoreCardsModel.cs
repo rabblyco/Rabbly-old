@@ -1,16 +1,19 @@
-using System;
-using System.ComponentModel.DataAnnotations.Schema;
 using Rabbly.Data.Models;
 using RabblyApi.Data.Utils;
 using RabblyApi.Users.Models;
+using RabblyApi.Debates.Models;
+using RabblyApi.Polls.Models;
+using RabblyApi.Comments.Models;
 
 namespace RabblyApi.ScoreCards.Models
 {
     public class ScoreCard : BaseModel
     {
         public User User { get; set; }
+        public Debate Debate { get; set; }
+        public Poll Poll { get; set; }
+        public Comment Comment { get; set; }
         public Opinion Opinion { get; set; }
-
         /*
         Emotional Fallacies
         */

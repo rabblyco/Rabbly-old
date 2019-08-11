@@ -86,10 +86,7 @@ namespace Api.Migrations
 
                     b.Property<string>("Bio");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                    b.Property<DateTime>("CreatedAt");
 
                     b.Property<string>("LogoUrl");
 
@@ -97,19 +94,49 @@ namespace Api.Migrations
 
                     b.Property<string>("OwnerId");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                    b.Property<DateTime>("UpdatedAt");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
 
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Groups");
+                });
+
+            modelBuilder.Entity("RabblyApi.Permissions.Models.Permission", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("CanAddMember");
+
+                    b.Property<bool>("CanAddRank");
+
+                    b.Property<bool>("CanCreateDiscussion");
+
+                    b.Property<bool>("CanCreateRole");
+
+                    b.Property<bool>("CanEditGroup");
+
+                    b.Property<bool>("CanEditMemberRank");
+
+                    b.Property<bool>("CanEditRankPermissions");
+
+                    b.Property<bool>("CanParticipateInGroupDiscussion");
+
+                    b.Property<bool>("CanRemoveMember");
+
+                    b.Property<bool>("CanRemoveRank");
+
+                    b.Property<bool>("CanRepresentGroup");
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<DateTime>("UpdatedAt");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Permissions");
                 });
 
             modelBuilder.Entity("RabblyApi.Polls.Models.Poll", b =>
@@ -117,19 +144,13 @@ namespace Api.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                    b.Property<DateTime>("CreatedAt");
 
                     b.Property<string>("CreatedById");
 
                     b.Property<string>("Topic");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                    b.Property<DateTime>("UpdatedAt");
 
                     b.HasKey("Id");
 
@@ -143,10 +164,7 @@ namespace Api.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                    b.Property<DateTime>("CreatedAt");
 
                     b.Property<string>("GroupId");
 
@@ -154,10 +172,7 @@ namespace Api.Migrations
 
                     b.Property<string>("Title");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
+                    b.Property<DateTime>("UpdatedAt");
 
                     b.HasKey("Id");
 
@@ -171,77 +186,102 @@ namespace Api.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AdHominem");
+                    b.Property<int>("AdHominem")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("Ambiguity");
+                    b.Property<int>("Bandwagon")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("Anecdotal");
+                    b.Property<int>("BeggingTheQuestion")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("AppealToNature");
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                    b.Property<int>("AuthorityAppeal");
+                    b.Property<int>("Dogmatism")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("Bandwagon");
+                    b.Property<int>("Equivocation")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("BeggingQuestion");
+                    b.Property<int>("FalseAssociation")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("BurdenProof");
+                    b.Property<int>("FalseAuthority")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("CherryPick");
+                    b.Property<int>("FalseDilemma")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<string>("CommentId");
+                    b.Property<int>("FalseNeed")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("CompositionDivision");
+                    b.Property<int>("FaultyAnalogy")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<DateTime>("CreatedAt");
+                    b.Property<int>("FaultyCausality")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<string>("DebateId");
+                    b.Property<int>("HastyGeneralization")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("EmotionAppeal");
+                    b.Property<int>("MoralEquivalence")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("FallacyFallacy");
+                    b.Property<int>("NonSequitor")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("FalseCause");
+                    b.Property<string>("Opinion")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue("Neutral");
 
-                    b.Property<int>("FalseDilemma");
+                    b.Property<int>("RedHerring")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("GamblerFallacy");
+                    b.Property<int>("ScareTactic")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("Genetic");
+                    b.Property<int>("SentimentalAppeal")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("LoadedQuestion");
+                    b.Property<int>("SlipperySlope")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("MiddleGround");
+                    b.Property<int>("StackedEvidence")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("NoTrueScotsman");
+                    b.Property<int>("StrawPerson")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("Opinion");
-
-                    b.Property<int>("PersonalIncredulity");
-
-                    b.Property<string>("PollId");
-
-                    b.Property<int>("SlipperySlope");
-
-                    b.Property<int>("SpecialPleading");
-
-                    b.Property<int>("Strawman");
-
-                    b.Property<int>("TuQuoque");
-
-                    b.Property<DateTime>("UpdatedAt");
-
-                    b.Property<string>("UserId");
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("DebateId");
-
-                    b.HasIndex("PollId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("ScoreCards");
                 });
@@ -261,13 +301,9 @@ namespace Api.Migrations
 
                     b.Property<string>("GroupId");
 
-                    b.Property<string>("GroupId1");
-
                     b.Property<string>("Password");
 
                     b.Property<string>("RankId");
-
-                    b.Property<string>("RankId1");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
@@ -281,11 +317,7 @@ namespace Api.Migrations
 
                     b.HasIndex("GroupId");
 
-                    b.HasIndex("GroupId1");
-
                     b.HasIndex("RankId");
-
-                    b.HasIndex("RankId1");
 
                     b.ToTable("Users");
                 });
@@ -321,116 +353,43 @@ namespace Api.Migrations
 
             modelBuilder.Entity("RabblyApi.Ranks.Models.Rank", b =>
                 {
-                    b.HasOne("RabblyApi.Groups.Models.Group", "Group")
+                    b.HasOne("RabblyApi.Groups.Models.Group")
                         .WithMany("Ranks")
                         .HasForeignKey("GroupId");
-
-                    b.OwnsOne("RabblyApi.Permissions.Models.Permission", "Permissions", b1 =>
-                        {
-                            b1.Property<string>("Id")
-                                .ValueGeneratedOnAdd();
-
-                            b1.Property<bool>("CanAddMember")
-                                .ValueGeneratedOnAdd()
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanAddRank")
-                                .ValueGeneratedOnAdd()
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanCreateDiscussion")
-                                .ValueGeneratedOnAdd()
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanCreateRole")
-                                .ValueGeneratedOnAdd()
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanEditGroup")
-                                .ValueGeneratedOnAdd()
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanEditMemberRank")
-                                .ValueGeneratedOnAdd()
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanEditRankPermissions")
-                                .ValueGeneratedOnAdd()
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanParticipateInGroupDiscussion")
-                                .ValueGeneratedOnAdd()
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanRemoveMember")
-                                .ValueGeneratedOnAdd()
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanRemoveRank")
-                                .ValueGeneratedOnAdd()
-                                .HasDefaultValue(false);
-
-                            b1.Property<bool>("CanRepresentGroup")
-                                .ValueGeneratedOnAdd()
-                                .HasDefaultValue(false);
-
-                            b1.Property<DateTime>("CreatedAt")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("timestamp with time zone")
-                                .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                            b1.Property<DateTime>("UpdatedAt")
-                                .ValueGeneratedOnAddOrUpdate()
-                                .HasColumnType("timestamp with time zone")
-                                .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                            b1.HasKey("Id");
-
-                            b1.ToTable("Ranks");
-
-                            b1.HasOne("RabblyApi.Ranks.Models.Rank", "Rank")
-                                .WithOne("Permissions")
-                                .HasForeignKey("RabblyApi.Permissions.Models.Permission", "Id")
-                                .OnDelete(DeleteBehavior.Cascade);
-                        });
                 });
 
             modelBuilder.Entity("RabblyApi.ScoreCards.Models.ScoreCard", b =>
                 {
-                    b.HasOne("RabblyApi.Comments.Models.Comment")
-                        .WithMany("ScoreCard")
-                        .HasForeignKey("CommentId");
-
-                    b.HasOne("RabblyApi.Debates.Models.Debate")
+                    b.HasOne("RabblyApi.Comments.Models.Comment", "Comment")
                         .WithMany("ScoreCards")
-                        .HasForeignKey("DebateId");
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("RabblyApi.Polls.Models.Poll")
-                        .WithMany("ScoreCard")
-                        .HasForeignKey("PollId");
+                    b.HasOne("RabblyApi.Debates.Models.Debate", "Debate")
+                        .WithMany("ScoreCards")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("RabblyApi.Polls.Models.Poll", "Poll")
+                        .WithMany("ScoreCards")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("RabblyApi.Users.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .WithMany("ScoreCards")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("RabblyApi.Users.Models.User", b =>
                 {
-                    b.HasOne("RabblyApi.Groups.Models.Group", "Group")
-                        .WithMany()
-                        .HasForeignKey("GroupId");
-
                     b.HasOne("RabblyApi.Groups.Models.Group")
                         .WithMany("Users")
-                        .HasForeignKey("GroupId1");
-
-                    b.HasOne("RabblyApi.Ranks.Models.Rank", "Rank")
-                        .WithMany()
-                        .HasForeignKey("RankId");
+                        .HasForeignKey("GroupId");
 
                     b.HasOne("RabblyApi.Ranks.Models.Rank")
                         .WithMany("Users")
-                        .HasForeignKey("RankId1");
+                        .HasForeignKey("RankId");
 
                     b.OwnsOne("RabblyApi.Profiles.Models.Profile", "Profile", b1 =>
                         {

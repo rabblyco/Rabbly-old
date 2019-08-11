@@ -22,8 +22,8 @@ namespace RabblyApi.Users.Services
         {
             var user = await _context.Users
                             .Include(u => u.Profile)
-                            .Include(u => u.Group)
-                            .Include(u => u.Rank)
+                            // .Include(u => u.Group)
+                            // .Include(u => u.Rank)
                             .SingleOrDefaultAsync(u => u.Email == email);
             if (user == null) return null;
 
@@ -41,8 +41,8 @@ namespace RabblyApi.Users.Services
         {
             var user = await _context.Users
                             .Include(u => u.Profile)
-                            .Include(u => u.Group)
-                            .Include(u => u.Rank)
+                            // .Include(u => u.Group)
+                            // .Include(u => u.Rank)
                             .SingleOrDefaultAsync(u => u.Email == model.Email);
             if (user == null) return null;
             var result = BCrypt.Net.BCrypt.EnhancedVerify(model.Password, user.Password);

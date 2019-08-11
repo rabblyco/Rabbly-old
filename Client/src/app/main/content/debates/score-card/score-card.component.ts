@@ -14,7 +14,6 @@ export interface ScoreCardDialogData {
   styleUrls: ['./score-card.component.scss']
 })
 export class ScoreCardComponent implements OnInit {
-
   constructor(public dialogRef: MatDialogRef<ScoreCardComponent>, @Inject(MAT_DIALOG_DATA) public data: ScoreCardDialogData) { }
 
   ngOnInit() {

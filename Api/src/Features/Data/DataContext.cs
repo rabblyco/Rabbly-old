@@ -42,9 +42,10 @@ namespace RabblyApi.Data
             // Users
             builder.Entity<User>().HasKey(u => u.Id);
             builder.Entity<User>().HasIndex(u => u.Email).IsUnique();
-            builder.Entity<User>().HasOne(u => u.Rank);
+            // builder.Entity<User>().HasOne(u => u.Rank);
             builder.Entity<User>().OwnsOne(u => u.Profile);
-            builder.Entity<User>().HasOne(u => u.Group);
+            // builder.Entity<User>().HasOne(u => u.Group);
+            builder.Entity<User>().HasMany(u => u.ScoreCards);
             builder.Entity<User>().Property(u => u.CreatedAt).ValueGeneratedOnAdd().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
             builder.Entity<User>().Property(u => u.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
 
@@ -57,26 +58,26 @@ namespace RabblyApi.Data
             builder.Entity<Profile>().Property(p => p.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
             
             // Group
-            builder.Entity<Group>().HasKey(g => g.Id);
-            builder.Entity<Group>().HasMany(g => g.Users);
-            builder.Entity<Group>().HasMany(g => g.Ranks);
-            builder.Entity<Group>().HasOne(g => g.Owner);
-            builder.Entity<Group>().HasIndex(g => g.Name).IsUnique();
-            builder.Entity<Group>().Property(g => g.CreatedAt).ValueGeneratedOnAdd().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
-            builder.Entity<Group>().Property(g => g.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            // builder.Entity<Group>().HasKey(g => g.Id);
+            // builder.Entity<Group>().HasMany(g => g.Users);
+            // builder.Entity<Group>().HasMany(g => g.Ranks);
+            // builder.Entity<Group>().HasOne(g => g.Owner);
+            // builder.Entity<Group>().HasIndex(g => g.Name).IsUnique();
+            // builder.Entity<Group>().Property(g => g.CreatedAt).ValueGeneratedOnAdd().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            // builder.Entity<Group>().Property(g => g.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             // Ranks
-            builder.Entity<Rank>().HasKey(r => r.Id);
-            builder.Entity<Rank>().HasOne(r => r.Group);
-            builder.Entity<Rank>().OwnsOne(r => r.Permissions);
-            builder.Entity<Rank>().HasMany(r => r.Users);
-            builder.Entity<Rank>().Property(r => r.CreatedAt).ValueGeneratedOnAdd().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
-            builder.Entity<Rank>().Property(r => r.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            // builder.Entity<Rank>().HasKey(r => r.Id);
+            // builder.Entity<Rank>().HasOne(r => r.Group);
+            // builder.Entity<Rank>().OwnsOne(r => r.Permissions);
+            // builder.Entity<Rank>().HasMany(r => r.Users);
+            // builder.Entity<Rank>().Property(r => r.CreatedAt).ValueGeneratedOnAdd().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            // builder.Entity<Rank>().Property(r => r.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             // Comments
             builder.Entity<Comment>().HasKey(c => c.Id);
             builder.Entity<Comment>().HasOne<Debate>().WithMany(d => d.Comments).HasForeignKey(c => c.DebateId);
-            builder.Entity<Comment>().HasMany(c => c.ScoreCard);
+            builder.Entity<Comment>().HasMany(c => c.ScoreCards);
             builder.Entity<Comment>().HasMany(c => c.Children);
             builder.Entity<Comment>().HasOne(c => c.Parent);
             builder.Entity<Comment>().HasOne(c => c.CreatedBy);
@@ -91,30 +92,55 @@ namespace RabblyApi.Data
             builder.Entity<Debate>().Property(d => d.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             // Polls
-            builder.Entity<Poll>().HasKey(p => p.Id);
-            builder.Entity<Poll>().HasOne(p => p.CreatedBy);
-            builder.Entity<Poll>().HasMany(p => p.ScoreCard);
-            builder.Entity<Poll>().Property(p => p.CreatedAt).ValueGeneratedOnAdd().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
-            builder.Entity<Poll>().Property(p => p.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            // builder.Entity<Poll>().HasKey(p => p.Id);
+            // builder.Entity<Poll>().HasOne(p => p.CreatedBy);
+            // builder.Entity<Poll>().HasMany(p => p.ScoreCard);
+            // builder.Entity<Poll>().Property(p => p.CreatedAt).ValueGeneratedOnAdd().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            // builder.Entity<Poll>().Property(p => p.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             // Permissions
-            builder.Entity<Permission>().HasKey(p => p.Id);
-            builder.Entity<Permission>().Property(p => p.CanAddMember).HasDefaultValue(false);
-            builder.Entity<Permission>().Property(p => p.CanAddRank).HasDefaultValue(false);
-            builder.Entity<Permission>().Property(p => p.CanCreateDiscussion).HasDefaultValue(false);
-            builder.Entity<Permission>().Property(p => p.CanEditGroup).HasDefaultValue(false);
-            builder.Entity<Permission>().Property(p => p.CanCreateRole).HasDefaultValue(false);
-            builder.Entity<Permission>().Property(p => p.CanEditMemberRank).HasDefaultValue(false);
-            builder.Entity<Permission>().Property(p => p.CanEditRankPermissions).HasDefaultValue(false);
-            builder.Entity<Permission>().Property(p => p.CanParticipateInGroupDiscussion).HasDefaultValue(false);
-            builder.Entity<Permission>().Property(p => p.CanRemoveMember).HasDefaultValue(false);
-            builder.Entity<Permission>().Property(p => p.CanRemoveRank).HasDefaultValue(false);
-            builder.Entity<Permission>().Property(p => p.CanRepresentGroup).HasDefaultValue(false);
-            builder.Entity<Permission>().Property(p => p.CreatedAt).ValueGeneratedOnAdd().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
-            builder.Entity<Permission>().Property(p => p.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            // builder.Entity<Permission>().HasKey(p => p.Id);
+            // builder.Entity<Permission>().Property(p => p.CanAddMember).HasDefaultValue(false);
+            // builder.Entity<Permission>().Property(p => p.CanAddRank).HasDefaultValue(false);
+            // builder.Entity<Permission>().Property(p => p.CanCreateDiscussion).HasDefaultValue(false);
+            // builder.Entity<Permission>().Property(p => p.CanEditGroup).HasDefaultValue(false);
+            // builder.Entity<Permission>().Property(p => p.CanCreateRole).HasDefaultValue(false);
+            // builder.Entity<Permission>().Property(p => p.CanEditMemberRank).HasDefaultValue(false);
+            // builder.Entity<Permission>().Property(p => p.CanEditRankPermissions).HasDefaultValue(false);
+            // builder.Entity<Permission>().Property(p => p.CanParticipateInGroupDiscussion).HasDefaultValue(false);
+            // builder.Entity<Permission>().Property(p => p.CanRemoveMember).HasDefaultValue(false);
+            // builder.Entity<Permission>().Property(p => p.CanRemoveRank).HasDefaultValue(false);
+            // builder.Entity<Permission>().Property(p => p.CanRepresentGroup).HasDefaultValue(false);
+            // builder.Entity<Permission>().Property(p => p.CreatedAt).ValueGeneratedOnAdd().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
+            // builder.Entity<Permission>().Property(p => p.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
         
             // ScoreCards   
             builder.Entity<ScoreCard>().HasKey(sc => sc.Id);
+            builder.Entity<ScoreCard>().HasOne(sc => sc.User).WithMany(u => u.ScoreCards).HasForeignKey(u => u.Id);
+            builder.Entity<ScoreCard>().HasOne(sc => sc.Debate).WithMany(d => d.ScoreCards).HasForeignKey(d => d.Id);
+            builder.Entity<ScoreCard>().HasOne(sc => sc.Comment).WithMany(c => c.ScoreCards).HasForeignKey(c => c.Id);
+            builder.Entity<ScoreCard>().HasOne(sc => sc.Poll).WithMany(p => p.ScoreCards).HasForeignKey(p => p.Id);
+            builder.Entity<ScoreCard>().Property(sc => sc.Opinion).HasConversion(o => o.ToString(), o => (Opinion)Enum.Parse(typeof(Opinion), o)).HasDefaultValue(Opinion.Neutral);
+            builder.Entity<ScoreCard>().Property(sc => sc.AdHominem).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.Bandwagon).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.BeggingTheQuestion).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.Dogmatism).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.Equivocation).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.FalseAssociation).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.FalseAuthority).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.FalseDilemma).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.FalseNeed).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.FaultyAnalogy).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.FaultyCausality).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.HastyGeneralization).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.MoralEquivalence).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.NonSequitor).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.RedHerring).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.ScareTactic).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.SentimentalAppeal).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.SlipperySlope).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.StackedEvidence).HasDefaultValue(0);
+            builder.Entity<ScoreCard>().Property(sc => sc.StrawPerson).HasDefaultValue(0);
             builder.Entity<ScoreCard>().Property(sc => sc.CreatedAt).ValueGeneratedOnAdd().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
             builder.Entity<ScoreCard>().Property(sc => sc.UpdatedAt).ValueGeneratedOnAddOrUpdate().HasColumnType("timestamp with time zone").HasDefaultValueSql("CURRENT_TIMESTAMP");
         }

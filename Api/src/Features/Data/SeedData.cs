@@ -39,14 +39,13 @@ namespace RabblyApi.Data
             _groupService = groupService;
         }
 
-        public void GenerateData()
+        public async Task GenerateData()
         {
-            GenerateDevelopmentUsers().Wait();
-            GenerateDevelopmentEditedProfiles().Wait();
-            GenerateDebates().Wait();
-            GenerateComments().Wait();
-            GenerateGroups().Wait();
-            GenerateComments().Wait();
+            await GenerateDevelopmentUsers();
+            await GenerateDevelopmentEditedProfiles();
+            await GenerateDebates();
+            await GenerateComments();
+            // GenerateGroups().Wait();
         }
 
         private async Task GenerateDevelopmentUsers()
@@ -103,7 +102,7 @@ namespace RabblyApi.Data
                 new DebateRequestDto() {
                     Topic = $"{users[0].Email} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                     Description = $"{users[0].Email} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                    CreatedById = users[0].Id
+                    CreatedById = users[0].Id 
                 },
                 new DebateRequestDto()
         {
@@ -134,15 +133,15 @@ namespace RabblyApi.Data
             foreach (var debate in debates)
             {
                 await _debateService.CreateDebate(debate);
-}
-await _context.SaveChangesAsync();
+            }
+            await _context.SaveChangesAsync();
         }
 
         private async Task GenerateComments()
-{
-    var users = await _context.Users.ToListAsync();
-    var debates = await _context.Debates.Take(5).ToListAsync();
-    var comments = new CommentRequestDto[] {
+        {
+            var users = await _context.Users.ToListAsync();
+            var debates = await _context.Debates.Take(5).ToListAsync();
+            var comments = new CommentRequestDto[] {
                 new CommentRequestDto() {
                     Text = $"{debates[0].Topic} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                     CreatedBy = users[0],
@@ -174,26 +173,26 @@ await _context.SaveChangesAsync();
                     Parent = null
                 }
             };
-    foreach (var comment in comments)
-    {
-        await _commentService.CreateComment(comment);
-    }
-    await _context.SaveChangesAsync();
-}
+            foreach (var comment in comments)
+            {
+                await _commentService.CreateComment(comment);
+            }
+            await _context.SaveChangesAsync();
+        }
 
-private async Task GenerateGroups()
-{
-    var users = await _context.Users.ToListAsync();
-    var groups = new GroupCreateRequestDto[] {
-                new GroupCreateRequestDto() { Bio = "A new bio", Creator = users[0], LogoUrl = "https://www.mylogo.com/group.png",  Name = $"Group by: {users[0].Profile.Username}" },
-                new GroupCreateRequestDto() { Bio = "A new bio", Creator = users[1], LogoUrl = "https://www.mylogo.com/group.png",  Name = $"Group by: {users[1].Profile.Username}" },
-            };
+        // private async Task GenerateGroups()
+        // {
+        //     var users = await _context.Users.ToListAsync();
+        //     var groups = new GroupCreateRequestDto[] {
+        //                 new GroupCreateRequestDto() { Bio = "A new bio", Creator = users[0], LogoUrl = "https://www.mylogo.com/group.png",  Name = $"Group by: {users[0].Profile.Username}" },
+        //                 new GroupCreateRequestDto() { Bio = "A new bio", Creator = users[1], LogoUrl = "https://www.mylogo.com/group.png",  Name = $"Group by: {users[1].Profile.Username}" },
+        //             };
 
-    foreach (var group in groups)
-    {
-        await _groupService.CreateGroup(group);
-    }
-    await _context.SaveChangesAsync();
-}
+        //     foreach (var group in groups)
+        //     {
+        //         await _groupService.CreateGroup(group);
+        //     }
+        //     await _context.SaveChangesAsync();
+        // }
     }
 }

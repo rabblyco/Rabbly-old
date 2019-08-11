@@ -24,7 +24,7 @@ namespace RabblyApi.Permissions.Models
         public bool CanRepresentGroup { get; set; }
         public bool CanParticipateInGroupDiscussion { get; set; }
         // Metadata
-        [JsonIgnore]
-        public Rank Rank { get; set; }
+        // [JsonIgnore]
+        // public Rank Rank { get; set; }
     }
 }

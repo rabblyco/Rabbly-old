@@ -11,6 +11,6 @@ namespace RabblyApi.Polls.Models
     {
         public string Topic { get; set; }
         public User CreatedBy { get; set; }
-        public IQueryable<ScoreCard> ScoreCard { get; set; }
+        public IQueryable<ScoreCard> ScoreCards { get; set; }
     }
 }

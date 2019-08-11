@@ -39,27 +39,27 @@ namespace RabblyApi.Groups.Controllers
             return Ok(groups);
         }
 
-        [HttpPost("create")]
-        public async Task<IActionResult> CreateGroup(GroupCreateRequestDto group)
-        {
-            var groupCreated = await _groupService.CreateGroup(group);
-            if (!groupCreated)
-            {
-                return BadRequest();
-            }
-            return Ok();
-        }
+        // [HttpPost("create")]
+        // public async Task<IActionResult> CreateGroup(GroupCreateRequestDto group)
+        // {
+        //     var groupCreated = await _groupService.CreateGroup(group);
+        //     if (!groupCreated)
+        //     {
+        //         return BadRequest();
+        //     }
+        //     return Ok();
+        // }
 
-        [HttpPatch("edit")]
-        public async Task<IActionResult> EditGroup([FromRoute] string id, GroupCreateRequestDto group)
-        {
-            var editedGroup = await _groupService.EditGroup(id, group);
-            if (editedGroup == null)
-            {
-                return BadRequest();
-            }
-            return Ok(editedGroup);
-        }
+        // [HttpPatch("edit")]
+        // public async Task<IActionResult> EditGroup([FromRoute] string id, GroupCreateRequestDto group)
+        // {
+        //     var editedGroup = await _groupService.EditGroup(id, group);
+        //     if (editedGroup == null)
+        //     {
+        //         return BadRequest();
+        //     }
+        //     return Ok(editedGroup);
+        // }
 
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteGroup([FromRoute] string id)
