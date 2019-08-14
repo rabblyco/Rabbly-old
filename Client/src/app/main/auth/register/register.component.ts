@@ -41,19 +41,33 @@ export class RegisterComponent implements OnInit {
       email: this.form.email.value,
       password: this.form.password.value
     };
-    if (this.registerForm.invalid) { return; }
 
-    if (this.form.password.value !== this.form.confirmPassword.value) {
-      this.registerForm.controls.confirmPassword.setErrors({ valid: false });
+    if (this.registerForm.controls['password'].value.length < 12) {
+      this.registerForm.setErrors({ 'pwLength': true });
       return;
     }
+
+    if (this.registerForm.touched && (this.form.password.value !== this.form.confirmPassword.value)) {
+      this.registerForm.setErrors({ 'pwMatch': true });
+      return;
+    }
+
+    if (this.registerForm.controls['email'].invalid || this.registerForm.controls['username'].invalid || this.registerForm.controls['password'].invalid) { 
+
+      this.registerForm.setErrors({ 'notValid': true });
+      return;
+    }
+
     this.authService.register(creds).subscribe(
       res => {
         if (res === true) {
           this.router.navigateByUrl('/auth/login');
         }
       },
-      err => console.log(err)
+      err => {
+        this.registerForm.setErrors({ 'signupFail': true });
+        return;
+      }
     );
   }
 }

@@ -132,6 +132,8 @@ table {
   border-spacing: 0;
 }
 
+/* Custom global styles */
+
 hr {
   margin: 0;
 }
@@ -165,6 +167,11 @@ body {
 
     strong {
       font-weight: 600;
+    }
+
+    small {
+      font-size: 12px;
+      color: #6e6e6e;
     }
 }
 
@@ -304,11 +311,59 @@ button {
 }
 
 .form-container {
-  max-width: 380px;
+  max-width: 324px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto;
+  margin: 12px auto;
+
+  form {
+    width: 100%;
+    padding: 12px;
+    box-shadow: 0 1px 8px 3px rgba(98, 98, 98, .33);
+    label {
+        display: block;
+    }
+
+    input {
+        width: 100%;
+        max-width: 224px;
+        padding: 4px 8px;
+    }
+
+    fieldset {
+        padding-bottom: 12px;
+        text-align: center;
+    }
+
+    .invalid {
+        border-color: #ff413e;
+    }
+
+    &:hover {
+        box-shadow: 0 1px 8px 1px rgba(98, 98, 98, .33);
+    }
+
+    .error-container {
+      width: 100%;
+      margin: 4px auto;
+      max-width: 242px;
+
+      .form-error {
+        font-size: 12px;
+        color: #ff413e;
+      }
+    }
+
+
+
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      max-width: 242px;
+      margin: 8px auto;
+    }
+  }
 }
 
 
@@ -332,7 +387,6 @@ button {
 
   .comment-form {
     height: 100%;
-    padding-bottom: 40px;
     margin-top: 8px;
   }
 
@@ -353,9 +407,9 @@ button {
     justify-content: flex-end !important;
     align-items: flex-end !important;
     padding: 0 !important;
-    position: absolute;
-    bottom: 40px;
-    right: 16px;
+    display: inline-flex;
+    width: 100%;
+    margin-top: 16px;
     min-height: 36px !important;
 
     button {

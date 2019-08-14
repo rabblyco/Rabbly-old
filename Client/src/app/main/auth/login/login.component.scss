@@ -1,20 +1,10 @@
-.form-container {
-    display: flex;
-    flex-direction: column;
-
-    form {
-        label {
-            display: block;
+.error-container {
+    .form-error {
+        .material-icons {
+            vertical-align: sub;
+            font-size: 16px;
+            margin-right: 4px;
         }
-
-        .invalid {
-            border-color: red;
-        }
-    }
-
-    .btn-container {
-        display: flex;
-        justify-content: space-between;
     }
 }
 

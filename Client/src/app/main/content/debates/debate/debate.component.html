@@ -36,8 +36,12 @@
           *ngIf="editedAfterCreation">Edited: {{ debate?.updatedAt | amTimeAgo }}</div>
       </div>
       <div class="body">
-        <div class="topic">{{ debate?.topic }}</div>
+        <div class="topic">
+          <div><small>Topic:</small></div>
+          {{ debate?.topic }}
+        </div>
         <div class="description">
+          <div><small>Description:</small></div>
           {{ debate?.description }}
         </div>
       </div>

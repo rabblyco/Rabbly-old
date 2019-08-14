@@ -52,10 +52,13 @@
         height: 100%;
         .topic {
           min-height: 112px;
+          padding: 4px;
+          border-bottom: 1px solid #ddd;
         }
 
         .description {
           min-height: 112px;
+          padding: 4px;
         }
       }
     }

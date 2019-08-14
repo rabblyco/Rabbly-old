@@ -43,7 +43,12 @@ export class LoginComponent implements OnInit {
       email: this.form.email.value,
       password: this.form.password.value
     };
-    if (this.loginForm.invalid) { return; }
+    if (this.loginForm.invalid) {
+      this.loginForm.setErrors({
+        'loginError': 'Invalid email or password'
+      });
+      return; 
+    }
     this.authService.login(creds).subscribe((res: any) => {
         console.log(res);
         this.store.dispatch(new Login());
@@ -55,7 +60,7 @@ export class LoginComponent implements OnInit {
     }, err => {
       // this.store.dispatch(null);
       this.loginForm.setErrors({
-        'loginError': 'Unable to login'
+        'loginError': 'Invalid email or password'
       });
       return err;
     });
@@ -91,7 +96,7 @@ export class LoginComponent implements OnInit {
         .catch(err => {
           // this.store.dispatch(null);
           this.loginForm.setErrors({
-            'loginError': 'Unable to login'
+            'loginError': 'Invalid email or password'
           });
           return err;
         });

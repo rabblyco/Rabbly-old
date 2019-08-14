@@ -13,27 +13,27 @@ namespace RabblyApi.Groups.Services
 {
     public class GroupService
     {
-        private readonly DatabaseContext _context;
+        // private readonly DatabaseContext _context;
 
-        public GroupService(DatabaseContext context)
-        {
-            _context = context;
-        }
+        // public GroupService(DatabaseContext context)
+        // {
+        //     _context = context;
+        // }
 
-        public async Task<Group> GetGroup(string id)
-        {
-            var group = await _context.Groups.FirstOrDefaultAsync(g => g.Id == id);
-            if (group == null)
-            {
-                return null;
-            }
-            return group;
-        }
+        // public async Task<Group> GetGroup(string id)
+        // {
+        //     var group = await _context.Groups.FirstOrDefaultAsync(g => g.Id == id);
+        //     if (group == null)
+        //     {
+        //         return null;
+        //     }
+        //     return group;
+        // }
 
-        public async Task<List<Group>> GetAllGroups()
-        {
-            return await _context.Groups.OrderByDescending(g => g.Users.Count()).ToListAsync();
-        }
+        // public async Task<List<Group>> GetAllGroups()
+        // {
+        //     return await _context.Groups.OrderByDescending(g => g.Users.Count()).ToListAsync();
+        // }
 
 
         // public async Task<bool> CreateGroup(GroupCreateRequestDto group)
@@ -95,21 +95,21 @@ namespace RabblyApi.Groups.Services
         //     return groupToEdit;
         // }
 
-        public async Task<bool> DeleteGroup(string id)
-        {
-            var group = await _context.Groups.FirstOrDefaultAsync(g => g.Id == id);
-            try
-            {
-                _context.Groups.Remove(group);
-                await _context.SaveChangesAsync();
-            }
-            catch(Exception ex)
-            {
-                Console.Write(ex);
-                return false;
-            }
-            return true;
-        }
+        // public async Task<bool> DeleteGroup(string id)
+        // {
+        //     var group = await _context.Groups.FirstOrDefaultAsync(g => g.Id == id);
+        //     try
+        //     {
+        //         _context.Groups.Remove(group);
+        //         await _context.SaveChangesAsync();
+        //     }
+        //     catch(Exception ex)
+        //     {
+        //         Console.Write(ex);
+        //         return false;
+        //     }
+        //     return true;
+        // }
 
         // private async Task<List<Rank>> CreateDefaultRanks(Group group)
         // {

@@ -32,10 +32,10 @@ namespace RabblyApi.Data
         public DbSet<Poll> Polls { get; set; }
         public DbSet<Debate> Debates { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Group> Groups { get; set; }
-        public DbSet<Rank> Ranks { get; set; }
+        // public DbSet<Group> Groups { get; set; }
+        // public DbSet<Rank> Ranks { get; set; }
         public DbSet<ScoreCard> ScoreCards { get; set; }
-        public DbSet<Permission> Permissions { get; set; }
+        // public DbSet<Permission> Permissions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

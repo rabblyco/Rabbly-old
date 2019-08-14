@@ -1,39 +1,51 @@
 <div class="form-container">
-    <form [formGroup]="registerForm" (ngSubmit)="submit()">
-      <fieldset>
-        <label>Email</label>
-        <input
-          type="email"
-          formControlName="email"
-          [ngClass]="{ invalid: form.email.dirty && !form.email.valid }"
-        />
-      </fieldset>
-      <fieldset>
-        <label>Username</label>
-        <input
-          type="text"
-          formControlName="username"
-          [ngClass]="{ invalid: form.username.dirty && !form.username.valid }"
-        />
-      </fieldset>
-      <fieldset>
-        <label>Password</label>
-        <input
-          type="password"
-          formControlName="password"
-          [ngClass]="{ invalid: form.password.dirty && !form.password.valid }"
-        />
-      </fieldset>
-      <fieldset>
-        <label>Confirm Password</label>
-        <input
-          type="password"
-          formControlName="confirmPassword"
-          [ngClass]="{ invalid: form.confirmPassword.dirty && !form.confirmPassword.valid }"
-        />
-      </fieldset>
-      <button type="submit">Submit</button>
-    </form>
-    <button routerLink="/auth/login">Login instead</button>
-  </div>
-  
+  <form [formGroup]="registerForm" (ngSubmit)="submit()">
+    <div class="error-container">
+      <div *ngIf="registerForm.errors?.notValid" class="form-error">
+        <i class="material-icons">
+          error
+        </i>Invalid email, username, or password.
+      </div>
+      <div *ngIf="registerForm.errors?.pwMatch" class="form-error">
+        <i class="material-icons">
+          error
+        </i>Passwords do not match.
+      </div>
+      <div *ngIf="registerForm.errors?.pwLength" class="form-error">
+        <i class="material-icons">
+          error
+        </i>Password must be at least 12 characters long.
+      </div>
+      <div *ngIf="registerForm.errors?.signupFail" class="form-error">
+        <i class="material-icons">
+          error
+        </i>Unable to register, please try a different username or email.
+      </div>
+    </div>
+    <fieldset>
+      <label><small>Email</small></label>
+      <input type="email" formControlName="email" placeholder="Enter your email"
+        [ngClass]="{ invalid: form.email.dirty && !form.email.valid }" />
+    </fieldset>
+    <fieldset>
+      <label><small>Username</small></label>
+      <input type="text" formControlName="username" placeholder="Enter your username"
+        [ngClass]="{ invalid: form.username.dirty && !form.username.valid }" />
+    </fieldset>
+    <fieldset>
+      <label><small>Password</small></label>
+      <input type="password" formControlName="password" placeholder="Enter your password"
+        [ngClass]="{ invalid: form.password.dirty && !form.password.valid }" />
+    </fieldset>
+    <fieldset>
+      <label><small>Confirm Password</small></label>
+      <input type="password" formControlName="confirmPassword" placeholder="Confirm your password"
+        [ngClass]="{ invalid: form.confirmPassword.dirty && !form.confirmPassword.valid }" />
+    </fieldset>
+    <div class="btn-container">
+      <button class="fill primary" type="submit">Submit</button>
+      <button class="outline primary" routerLink="/auth/login">Login instead</button>
+    </div>
+  </form>
+
+</div>
