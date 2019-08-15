@@ -44,8 +44,9 @@
       class="inner"
       *ngFor="let debate of createdDebates"
       [ngClass]="{ 'selected' : this.currentItem === debate.id }"
+      [routerLink]="['/debate/' + debate.id]"
     >
-      <div [routerLink]="['/debate/' + debate.id]">{{ debate?.topic }}</div>
+      <div>{{ debate?.topic }}</div>
     </div>
     <div class="section-title">
       Participating
@@ -54,8 +55,9 @@
       class="inner"
       *ngFor="let debate of participatingDebates"
       [ngClass]="{ 'selected' : this.currentItem === debate.id }"
+      [routerLink]="['/debate/' + debate.id]"
     >
-      <div [routerLink]="['/debate/' + debate.id]">{{ debate?.topic }}</div>
+      <div>{{ debate?.topic }}</div>
     </div>
   </div>
   <hr />
