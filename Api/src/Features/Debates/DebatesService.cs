@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using RabblyApi.Data;
 using RabblyApi.Debates.Dtos;
 using RabblyApi.Debates.Models;
+using RabblyApi.ScoreCards.Models;
 using RabblyApi.Users.Models;
 
 namespace RabblyApi.Debates.Services
@@ -27,12 +28,12 @@ namespace RabblyApi.Debates.Services
         /// </summary>
         public async Task<List<Debate>> GetDebates()
         {
-            return await _context.Debates.OrderByDescending(d => d.CreatedAt).Take(12).Where(d => d.CreatedAt > DateTime.Today.AddDays(-7)).ToListAsync();
+            return await _context.Debates.OrderByDescending(d => d.CreatedAt).Take(12).Where(d => d.CreatedAt > DateTime.Today.AddDays(-7)).Include(d => d.ScoreCards).ToListAsync();
         }
 
         public async Task<List<Debate>> GetDebatesByUser(User user)
         {
-            return await _context.Debates.Where(d => d.CreatedById == user.Id).ToListAsync();
+            return await _context.Debates.Where(d => d.CreatedById == user.Id).Include(d => d.ScoreCards).ToListAsync();
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace RabblyApi.Debates.Services
         /// </summary>
         public async Task<Debate> GetDebate(string id)
         {
-            var debate = await _context.Debates.Include(d => d.Comments).FirstOrDefaultAsync(d => d.Id == id);
+            var debate = await _context.Debates.Include(d => d.Comments).Include(d => d.ScoreCards).FirstOrDefaultAsync(d => d.Id == id);
             if (debate == null)
             {
                 return null;
