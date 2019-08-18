@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DebateService } from '../services/debate.service';
+import { Debate } from 'src/app/models/debate.model';
 
 @Component({
   selector: 'app-debates',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./debates.component.scss']
 })
 export class DebatesComponent implements OnInit {
+  public debates: Debate[];
 
-  constructor() { }
+  constructor(private debateService: DebateService) { }
 
   ngOnInit() {
+    this.debateService.getDebates().subscribe(res => this.debates = res);
   }
 
 }

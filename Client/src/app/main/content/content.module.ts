@@ -9,14 +9,21 @@ import { DebatesComponent } from './debates/debates/debates.component';
 import { CommentsComponent } from './debates/comments/comments.component';
 import { MomentModule } from 'ngx-moment';
 import { CommentDialogComponent } from './debates/comments/comment-dialog/comment-dialog.component';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatCheckboxModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { ContentRoutingModule } from './content-routing.module';
 import { NotFoundComponent } from './misc/not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
 import { QuillModule } from 'ngx-quill';
 import { EditorComponent } from './debates/editor/editor.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ScoreCardComponent } from './debates/score-card/score-card.component';
+import { PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true,
+  scrollYMarginOffset: 8
+};
 @NgModule({
   declarations: [
     DebateComponent,
@@ -28,27 +35,36 @@ import { EditorComponent } from './debates/editor/editor.component';
     CommentDialogComponent,
     NotFoundComponent,
     HomeComponent,
-    EditorComponent
+    EditorComponent,
+    ScoreCardComponent
   ],
   imports: [
     CommonModule,
     ContentRoutingModule,
     MomentModule,
     MatDialogModule,
+    MatCheckboxModule,
+    MatTooltipModule,
     FormsModule,
+    PerfectScrollbarModule,
     QuillModule.forRoot({
       theme: 'snow'
     })
   ],
   entryComponents: [
-    CommentDialogComponent
+    CommentDialogComponent,
+    ScoreCardComponent
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthenticationInterceptor,
       multi: true
-    }
+    },
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    },
   ]
 })
 export class ContentModule { }

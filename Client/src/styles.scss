@@ -6,7 +6,7 @@
 
 @import './assets/css/quill.snow.css';
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-@import url('https://fonts.googleapis.com/css?family=Muli:300,400,400i,600,700&display=swap&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,400i,600,700&display=swap');
 html,
 body,
 div,
@@ -32,7 +32,7 @@ cite,
 code,
 del,
 dfn,
-em,
+// em,
 img,
 ins,
 kbd,
@@ -42,8 +42,8 @@ samp,
 small,
 strike,
 // strong,
-sub,
-sup,
+// sub,
+// sup,
 tt,
 var,
 b,
@@ -132,6 +132,8 @@ table {
   border-spacing: 0;
 }
 
+/* Custom global styles */
+
 hr {
   margin: 0;
 }
@@ -148,7 +150,12 @@ form {
 
 
 body {
-    font-family: 'Muli', sans-serif !important;
+    font-family: 'Nunito', sans-serif !important;
+    font-size: 16px;
+
+    * {
+      font-family: 'Nunito', sans-serif;
+    }
 
     a {
       color: inherit;
@@ -161,108 +168,139 @@ body {
     strong {
       font-weight: 600;
     }
+
+    small {
+      font-size: 12px;
+      color: #6e6e6e;
+    }
 }
 
 button {
   border-width: 1px;
   border-style: solid;
-  border-radius: 5px;
-  padding: 8px 12px;
+  border-radius: .375rem;
+  padding: 6px 10px;
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
   outline-style: none !important;
   font-weight: 600;
   cursor: pointer;
 
+  &.circle {
+    border-radius: 100%;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &.outline {
     background-color: #fff;
-    border-color: #eee;
+    color: #404040;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 8px 3px rgba(98, 98, 98, .33);
 
     &.primary {
-      color: #7d1707;
+      color: #443eff;
 
       &:hover {
         color: #fff;
-        background-color: #7d1707;
-        border-color: #7d1707;
+        background-color: #443eff;
+        border-color: #443eff;
       }
     }
 
     &.secondary {
-      color: #073c7d;
+      color: #ffa23e;
 
       &:hover {
         color: #fff;
-        background-color: #073c7d;
-        border-color: #073c7d;
+        background-color: #ffa23e;
+        border-color: #ffa23e;
       }
     }
 
     &.success {
-      color: #227d07;
+      color: #425937;
 
       &:hover {
         color: #fff;
-        background-color: #227d07;
-        border-color: #227d07;
+        background-color: #425937;
+        border-color: #425937;
       }
+    }
+
+    &:active {
+      box-shadow: 0 1px 6px 1px rgba(98, 98, 98, .33);
     }
   }
 
   &.fill {
     color: #fff;
+    box-shadow: 0 1px 8px 3px rgba(98, 98, 98, .33);
     &.primary {
-      background-color: #7d1707;
-      border-color: #7d1707;
+      background-color: #443eff;
+      border-color: #443eff;
 
       &:hover {
-        background-color: lighten(#7d1707, .1); 
+        background-color: lighten(#443eff, 5); 
       }
     }
 
     &.secondary {
-      background-color: #073c7d;
-      border-color: #073c7d;
+      background-color: #ffa23e;
+      border-color: #ffa23e;
+      color: #404040;
 
       &:hover {
-        background-color: lighten(#073c7d, .1); 
+        background-color: lighten(#ffa23e, 5); 
       }
     }
 
     &.success {
-      background-color: #227d07;
-      border-color: #227d07;
+      background-color: #425937;
+      border-color: #425937;
 
       &:hover {
-        background-color: lighten(#227d07, .1); 
+        background-color: lighten(#425937, .2); 
       }
     }
-  }
 
-  &:hover {
-    background-color: lighten($color: #7d1707, $amount: 10);
-    border-color: lighten($color: #7d1707, $amount: 10);
-    color: #fff;
-  }
-
-  &:active {
-    background-color: #7d1707;
-    border-color: #7d1707;
-    color: #fff;
+    &:active {
+      box-shadow: 0 1px 6px 1px rgba(98, 98, 98, .33);
+    }
   }
 }
 
+.rabbly-tooltip {
+  background-color: #404040;
+}
+
 .advert {
-  background-color: red;
+  background-color: #3eff4b;
   color: white;
 
   &.advert-side-large {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 12px;
     height: 600px;
     width: 300px;
     text-align: center;
-    writing-mode: vertical-rl;
   }
+
+  &.advert-side-medium {
+    position: absolute;
+    bottom: 28px;
+    right: 12px;
+    height: 250px;
+    width: 300px;
+    text-align: center;
+  }
+  
 
   &.advert-top {
       display: none;
@@ -272,13 +310,84 @@ button {
   }
 }
 
+.form-container {
+  max-width: 324px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 12px auto;
+
+  form {
+    width: 100%;
+    padding: 12px;
+    box-shadow: 0 1px 8px 3px rgba(98, 98, 98, .33);
+    label {
+        display: block;
+    }
+
+    input {
+        width: 100%;
+        max-width: 224px;
+        padding: 4px 8px;
+    }
+
+    fieldset {
+        padding-bottom: 12px;
+        text-align: center;
+    }
+
+    .invalid {
+        border-color: #ff413e;
+    }
+
+    &:hover {
+        box-shadow: 0 1px 8px 1px rgba(98, 98, 98, .33);
+    }
+
+    .error-container {
+      width: 100%;
+      margin: 4px auto;
+      max-width: 242px;
+
+      .form-error {
+        font-size: 12px;
+        color: #ff413e;
+      }
+    }
+
+
+
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      max-width: 242px;
+      margin: 8px auto;
+    }
+  }
+}
+
 
 .mat-dialog-container {
   border-radius: 0 !important;
+  min-height: 256px !important;
+  min-width: 256px !important;
+  padding: 16px !important;
+  position: relative;
+  max-height: 90vh !important;
 
   .mat-dialog-content {
     margin: 0 !important;
     padding: 0 !important;
+    min-height: 24px;
+  }
+
+  .ql-editor {
+    min-height: 112px;
+  }
+
+  .comment-form {
+    height: 100%;
+    margin-top: 8px;
   }
 
   .reply-input {
@@ -286,11 +395,25 @@ button {
     min-height: 112px;
   }
 
+  .checkbox {
+    &.mat-checkbox-checked {
+        .mat-checkbox-background {
+            background-color: #443eff !important;
+        }
+    }
+}
+
   .mat-dialog-actions {
     justify-content: flex-end !important;
+    align-items: flex-end !important;
+    padding: 0 !important;
+    display: inline-flex;
+    width: 100%;
+    margin-top: 16px;
+    min-height: 36px !important;
 
     button {
-      margin-left: 4px !important;
+      margin-left: 8px !important;
     }
   }
 }

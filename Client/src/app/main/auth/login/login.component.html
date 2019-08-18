@@ -1,29 +1,27 @@
 <div class="form-container">
-    <form [formGroup]="loginForm" (ngSubmit)="submit()">
-      <fieldset>
-        <label>Email</label>
-        <input
-          type="email"
-          formControlName="email"
-          [ngClass]="{ invalid: form.email.dirty && !form.email.valid }"
-        />
-      </fieldset>
-      <fieldset>
-        <label>Password</label>
-        <input
-          type="password"
-          formControlName="password"
-          [ngClass]="{ invalid: form.password.dirty && !form.password.valid }"
-        />
-      </fieldset>
-      <div class="btn-container">
-        <button type="submit">Submit</button>
-        <button routerLink="/auth/register">Sign Up</button>
-      </div>
-      <!-- <div *ngIf="loginForm.errors.loginError">There was an error while logging in. Please try again.</div> -->
-    </form>
-    <div class="social-container">
-      <button (click)="socialLogin('google')">Google</button>
+  <form [formGroup]="loginForm" (ngSubmit)="submit()">
+    <div class="error-container">
+      <div *ngIf="loginForm.errors" class="form-error"><i class="material-icons">
+          error
+        </i>Invalid email or password.</div>
     </div>
-  </div>
-  
+    <fieldset>
+      <label><small>Email</small></label>
+      <input type="email" formControlName="email" placeholder="Enter your email address"
+        [ngClass]="{ invalid: form.email.dirty && !form.email.valid }" />
+    </fieldset>
+    <fieldset>
+      <label><small>Password</small></label>
+      <input type="password" formControlName="password" placeholder="Enter your password"
+        [ngClass]="{ invalid: form.password.dirty && !form.password.valid }" />
+    </fieldset>
+    <div class="btn-container">
+      <button class="fill primary" type="submit">Submit</button>
+      <button class="fill primary" routerLink="/auth/register">Sign Up</button>
+    </div>
+    <!-- <div *ngIf="loginForm.errors.loginError">There was an error while logging in. Please try again.</div> -->
+    <div class="btn-container">
+      <button class="fill primary" (click)="socialLogin('google')">Google</button>
+    </div>
+  </form>
+</div>

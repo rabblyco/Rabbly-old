@@ -1,39 +1,57 @@
 <div class="advert advert-top">
   Advertisement
 </div>
-
 <div class="debate">
+  <div class="advert advert-side-large">
+    Advertisement
+  </div>
+  <div class="advert advert-side-medium">
+    Avertisement
+  </div>
   <div class="debate-card">
-    <div class="info">
-      <div>
-        <div class="created">
-          <div>Created:</div>
-          <div>{{ debate?.createdAt | amTimeAgo }}</div>
-        </div>
-        <div *ngIf="editedAfterCreation" class="edited">
-          <div>Edited:</div>
-          <div>{{ debate.updatedAt | amTimeAgo }}</div>
-        </div>
-      </div>
-      <div class="score-card-button">
-        <button type="button" class="outline secondary">Score Card</button>
-      </div>
+    <div class="actions">
+      <button *ngIf="canEdit" class="outline secondary circle" matTooltip="Edit your debate"
+        matTooltipClass="rabbly-tooltip"
+        aria-label="Edit your debate, only available for one hour after debate creation.">
+        <i class="material-icons">edit</i>
+      </button>
+      <button class="fill primary circle" matTooltip="Reply to this debate" matTooltipClass="rabbly-tooltip"
+        aria-label="This adds a top-level reply to this debate.">
+        <i class="material-icons">add</i>
+      </button>
+      <button class="fill secondary circle" matTooltip="Grade this debate" matTooltipClass="rabbly-tooltip"
+        aria-label="Use this to judge the debate's creator on their rhetoric.">
+        <i class="material-icons">ballot</i>
+      </button>
+      <button class="outline primary circle" matTooltip="Debate information" matTooltipClass="rabbly-tooltip"
+        aria-label="Contains general information about the debate.">
+        <i class="material-icons">info_outline</i>
+      </button>
     </div>
     <div class="main">
-      <div class="topic">{{ debate?.topic }}</div>
-      <div class="description">
-        {{ debate?.description }}
+      <div class="info">
+        <div matTooltip="{{ debate?.createdAt | date:'medium' }}" matTooltipClass="rabbly-tooltip">Created:
+          {{ debate?.createdAt | amTimeAgo }}</div>
+        <div matTooltip="{{ debate?.updatedAt | date:'medium' }}" matTooltipClass="rabbly-tooltip"
+          *ngIf="editedAfterCreation">Edited: {{ debate?.updatedAt | amTimeAgo }}</div>
       </div>
+      <div class="body">
+        <div class="topic">
+          <div><small>Topic:</small></div>
+          {{ debate?.topic }}
+        </div>
+        <div class="description">
+          <div><small>Description:</small></div>
+          {{ debate?.description }}
+        </div>
+      </div>
+
     </div>
   </div>
-  <app-comments [comment]="comment" *ngFor="let comment of debate?.comments">
-    <app-comments
-      style="padding-left: 12px;"
-      [comment]="comment"
-    ></app-comments>
-  </app-comments>
-</div>
+  <div class="comments-section">
+    <app-comments [comment]="comment" *ngFor="let comment of debate?.comments">
+      <app-comments style="padding-left: 12px;" [comment]="comment"></app-comments>
+    </app-comments>
+  </div>
 
-<div class="advert advert-side-medium">
-  Advertisement
 </div>

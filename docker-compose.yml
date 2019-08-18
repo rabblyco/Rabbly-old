@@ -28,6 +28,7 @@ services:
 
   client:
     image: rabbly-client
+    container_name: rabbly-client
     environment:
       NODE_ENV: development
     build:

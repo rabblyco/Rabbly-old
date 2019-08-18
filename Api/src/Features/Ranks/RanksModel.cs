@@ -13,10 +13,11 @@ namespace RabblyApi.Ranks.Models
     {
         public string Title { get; set; }
         public int Level { get; set; }
-        [JsonIgnore]
-        public Group Group { get; set; }
+        // [JsonIgnore]
+        // public Group Group { get; set; }
+
         [JsonIgnore]
         public IQueryable<User> Users { get; set; }
-        public Permission Permissions { get; set; }
+        // public Permission Permissions { get; set; }
     }
 }

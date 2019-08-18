@@ -1,7 +1,7 @@
 export interface Debate {
     id: string;
     topic: string;
-    creator: string;
+    createdById: string;
     description: string;
     createdAt: string;
     updatedAt: string;

@@ -8,4 +8,6 @@ export interface Profile {
     imageUrl: string;
     economicCoordinate: number;
     socialCoordinate: number;
+    createdAt: Date;
+    updatedAt: Date;
 }

@@ -15,6 +15,6 @@ namespace RabblyApi.Comments.Models
         public User CreatedBy { get; set; }
         public Comment Parent { get; set; }
         public IQueryable<Comment> Children { get; set; }
-        public IQueryable<ScoreCard> ScoreCard { get; set; }
+        public IQueryable<ScoreCard> ScoreCards { get; set; }
     }
 }

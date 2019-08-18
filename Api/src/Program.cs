@@ -32,7 +32,7 @@ namespace RabblyApi.Api
                 context.Database.Migrate();
                 if (env.IsDevelopment()) {
                     var dataSeeder = new SeedData(context, mapper, userService, profileService, debateService, commentService, groupService);
-                    dataSeeder.GenerateData();
+                    dataSeeder.GenerateData().Wait();
                 }
             }
             host.Run();

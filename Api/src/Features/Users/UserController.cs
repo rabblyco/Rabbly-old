@@ -120,7 +120,8 @@ namespace RabblyApi.Controllers
         {
             var claims = new[]
             {
-                new Claim(ClaimTypes.Email, user.Email)
+                new Claim("email", user.Email),
+                new Claim("sub", user.Id)
             };
 
             var tokenSecret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Keys:TokenSecret"]));

@@ -4,10 +4,11 @@ using Newtonsoft.Json.Converters;
 using RabblyApi.Users.Models;
 using RabblyApi.Data.Utils;
 using System.ComponentModel.DataAnnotations.Schema;
+using Rabbly.Data.Models;
 
 namespace RabblyApi.Profiles.Models
 {
-    public class Profile
+    public class Profile : BaseModel
     {
         [JsonIgnore]
         public User User { get; set; }

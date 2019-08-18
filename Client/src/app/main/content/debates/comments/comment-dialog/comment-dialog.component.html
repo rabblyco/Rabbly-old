@@ -1,9 +1,12 @@
-<p mat-dialog-content>{{ data.text }}</p>
-<div>Reply:</div>
-<form #replyForm="ngForm" (ngSubmit)="submitReply(replyForm)">
+<div mat-dialog-content>
+  <perfect-scrollbar>
+    <div style="padding-right: 12px">{{ data.text }}</div>
+  </perfect-scrollbar>
+</div>
+<form class="comment-form" #replyForm="ngForm" (ngSubmit)="submitReply(replyForm)">
   <app-editor (onEditorChanged)="logIt($event)"></app-editor>
-  <div mat-dialog-actions>
-    <button class="outline primary" mat-button (click)="onNoClick()">Cancel</button>
-    <button class="fill success" type="submit" mat-button (click)="submitReply(replyForm)">Submit</button>
-  </div>
 </form>
+<div mat-dialog-actions>
+  <button class="outline primary" mat-button (click)="onNoClick()">Cancel</button>
+  <button class="fill primary" type="submit" mat-button (click)="submitReply(replyForm)">Submit</button>
+</div>

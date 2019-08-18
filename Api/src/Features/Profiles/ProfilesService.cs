@@ -33,7 +33,12 @@ namespace RabblyApi.Profiles.Services
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
             if (user.Profile == null) return null;
-            user.Profile = _mapper.Map<RabblyApi.Profiles.Models.Profile>(editProfile);
+            user.Profile = _mapper.Map<ProfileEditDto, RabblyApi.Profiles.Models.Profile>(editProfile, opts => {
+                opts.ConfigureMap()
+                    .ForMember(dest => dest.Id, m => m.Ignore())
+                    .ForMember(dest => dest.UpdatedAt, m => m.Ignore())
+                    .ForMember(dest => dest.CreatedAt, m => m.Ignore());
+            });
             try
             {
                 _context.Users.Update(user);
