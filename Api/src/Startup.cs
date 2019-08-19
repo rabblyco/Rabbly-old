@@ -21,15 +21,18 @@ namespace RabblyApi.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            Env = env;
         }
 
         public IConfiguration Configuration { get; }
 
+        public IHostingEnvironment Env { get; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services, IHostingEnvironment env)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -39,7 +42,7 @@ namespace RabblyApi.Api
             services.AddScoped<CommentService>();
             services.AddScoped<GroupService>();
 
-            if (env.IsProduction())
+            if (Env.IsProduction())
             {
                 string dbHost = Environment.GetEnvironmentVariable("DbHost") ?? "";
                 string dbName = Environment.GetEnvironmentVariable("DbName") ?? "";
@@ -69,14 +72,9 @@ namespace RabblyApi.Api
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddGoogle("google", opt =>
-            {
-                opt.ClientId = "340114918710-6pebk36f1gccbri0fke24hqold2h058d.apps.googleusercontent.com";
-                opt.ClientSecret = "UZsrHyn2SKUQX-BfNWyxXUmG";
-            })
             .AddJwtBearer(opt =>
             {
-                var tokenSecretKey = env.IsProduction() ? Environment.GetEnvironmentVariable("TokenSecret") ?? "" : Configuration["Keys:TokenSecret"];
+                var tokenSecretKey = Env.IsProduction() ? Environment.GetEnvironmentVariable("TokenSecret") ?? "" : Configuration["Keys:TokenSecret"];
 
                 opt.TokenValidationParameters = new TokenValidationParameters()
                 {

@@ -117,9 +117,9 @@ namespace RabblyApi.Data
             // ScoreCards   
             builder.Entity<ScoreCard>().HasKey(sc => sc.Id);
             builder.Entity<ScoreCard>().HasOne(sc => sc.User).WithMany(u => u.ScoreCards).HasForeignKey(u => u.Id);
-            builder.Entity<ScoreCard>().HasOne(sc => sc.Debate).WithMany(d => d.ScoreCards).HasForeignKey(d => d.Id).IsRequired(false);
-            builder.Entity<ScoreCard>().HasOne(sc => sc.Comment).WithMany(c => c.ScoreCards).HasForeignKey(c => c.Id).IsRequired(false);
-            builder.Entity<ScoreCard>().HasOne(sc => sc.Poll).WithMany(p => p.ScoreCards).HasForeignKey(p => p.Id).IsRequired(false);
+            builder.Entity<ScoreCard>().HasOne(sc => sc.Debate).WithMany(d => d.ScoreCards).HasForeignKey(d => d.Id);
+            builder.Entity<ScoreCard>().HasOne(sc => sc.Comment).WithMany(c => c.ScoreCards).HasForeignKey(c => c.Id);
+            builder.Entity<ScoreCard>().HasOne(sc => sc.Poll).WithMany(p => p.ScoreCards).HasForeignKey(p => p.Id);
             builder.Entity<ScoreCard>().Property(sc => sc.Opinion).HasConversion(o => o.ToString(), o => (Opinion)Enum.Parse(typeof(Opinion), o)).HasDefaultValue(Opinion.Neutral);
             builder.Entity<ScoreCard>().Property(sc => sc.AdHominem).HasDefaultValue(0);
             builder.Entity<ScoreCard>().Property(sc => sc.Bandwagon).HasDefaultValue(0);
