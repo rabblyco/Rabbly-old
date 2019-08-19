@@ -12,6 +12,7 @@ using System;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using RabblyApi.Users.Models;
+using Microsoft.AspNetCore.Hosting;
 
 namespace RabblyApi.Controllers
 {
@@ -22,12 +23,14 @@ namespace RabblyApi.Controllers
         private readonly UserService _userService;
         private readonly IConfiguration _config;
         private readonly IMapper _mapper;
+        private readonly IHostingEnvironment _env;
 
-        public AuthController(UserService userService, IConfiguration config, IMapper mapper)
+        public AuthController(UserService userService, IConfiguration config, IMapper mapper, IHostingEnvironment env)
         {
             _userService = userService;
             _config = config;
             _mapper = mapper;
+            _env = env;
         }
 
         [HttpGet("check")]
@@ -124,7 +127,9 @@ namespace RabblyApi.Controllers
                 new Claim("sub", user.Id)
             };
 
-            var tokenSecret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Keys:TokenSecret"]));
+            var tokenSecretKey = _env.IsProduction() ? Environment.GetEnvironmentVariable("TokenSecret") ?? "" : _config["Keys:TokenSecret"];
+
+            var tokenSecret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSecretKey));
             // create some credentials and specify the encoding algorithm
             var signingCredentials = new SigningCredentials(tokenSecret, SecurityAlgorithms.HmacSha512);
 

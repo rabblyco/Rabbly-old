@@ -15,6 +15,7 @@ using RabblyApi.Groups.Services;
 using RabblyApi.Profiles.Services;
 using RabblyApi.Users.Services;
 using Newtonsoft.Json;
+using System;
 
 namespace RabblyApi.Api
 {
@@ -28,7 +29,7 @@ namespace RabblyApi.Api
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, IHostingEnvironment env)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -38,9 +39,26 @@ namespace RabblyApi.Api
             services.AddScoped<CommentService>();
             services.AddScoped<GroupService>();
 
-            services.AddEntityFrameworkNpgsql()
-                .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("Default")))
+            if (env.IsProduction())
+            {
+                string dbHost = Environment.GetEnvironmentVariable("DbHost") ?? "";
+                string dbName = Environment.GetEnvironmentVariable("DbName") ?? "";
+                string dbUsername = Environment.GetEnvironmentVariable("DbUsername") ?? "";
+                string dbPassword = Environment.GetEnvironmentVariable("DbPassword") ?? "";
+                // "Host=database;Database=rabbly;Username=rabbly;Password=password1234"
+                string connectionString = $"Host={dbHost};Database={dbName};Username={dbUsername};Password={dbPassword}";
+
+                services.AddEntityFrameworkNpgsql()
+                .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(connectionString))
                 .BuildServiceProvider();
+
+            }
+            else
+            {
+                services.AddEntityFrameworkNpgsql()
+                    .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("Default")))
+                    .BuildServiceProvider();
+            }
 
             services.AddAutoMapper();
 
@@ -58,15 +76,17 @@ namespace RabblyApi.Api
             })
             .AddJwtBearer(opt =>
             {
+                var tokenSecretKey = env.IsProduction() ? Environment.GetEnvironmentVariable("TokenSecret") ?? "" : Configuration["Keys:TokenSecret"];
+
                 opt.TokenValidationParameters = new TokenValidationParameters()
                 {
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Keys:TokenSecret"])),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSecretKey)),
                     RequireSignedTokens = false,
                     ValidIssuers = new string[] {
                         Configuration["Credentials:Issuer"],
-                        "accounts.google.com"
                     },
-                    ValidateAudience = false,
+                    ValidAudience = Configuration["Credentials:Audience"],
+                    ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                 };
