@@ -16,6 +16,7 @@ using RabblyApi.Profiles.Services;
 using RabblyApi.Users.Services;
 using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 
 namespace RabblyApi.Api
 {
@@ -50,6 +51,8 @@ namespace RabblyApi.Api
                 string dbPassword = Environment.GetEnvironmentVariable("DbPassword") ?? "";
                 // "Host=database;Database=rabbly;Username=rabbly;Password=password1234"
                 string connectionString = $"Host={dbHost};Database={dbName};Username={dbUsername};Password={dbPassword}";
+
+                Debug.WriteLine(connectionString);
 
                 services.AddEntityFrameworkNpgsql()
                 .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(connectionString))
