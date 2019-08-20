@@ -1,28 +1,16 @@
 version: '3.4'
 
 services:
-  database:
-    image: postgres:10-alpine
-    container_name: rabbly-db
-    environment:
-      POSTGRES_PASSWORD: password1234
-      POSTGRES_USER: rabbly
-      POSTGRES_DB: rabbly
-    ports:
-      - 5432:5432
-
-  api:
+  integration-tests:
     image: rabbly-integration
     container_name: rabbly-integration
-    depends_on: 
-      - database
     build:
       context: .
-      dockerfile: api/tests/integration-tests/Dockerfile
+      dockerfile: Api/tests/integration-tests/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Staging
     ports:
       - 5001:5001
     volumes:
-      - ./api/tests/integration-tests:/src/test
-      - ./api/src:/src/api
+      - ./Api/tests/integration-tests:/src/test
+      - ./Api/src:/src/api

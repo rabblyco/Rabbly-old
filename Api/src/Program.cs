@@ -29,7 +29,7 @@ namespace RabblyApi.Api
                 var debateService = scope.ServiceProvider.GetService<DebateService>();
                 var commentService = scope.ServiceProvider.GetService<CommentService>();
                 var groupService = scope.ServiceProvider.GetService<GroupService>();
-                context.Database.Migrate();
+                context.Database?.Migrate();
                 if (env.IsDevelopment()) {
                     var dataSeeder = new SeedData(context, mapper, userService, profileService, debateService, commentService, groupService);
                     dataSeeder.GenerateData().Wait();

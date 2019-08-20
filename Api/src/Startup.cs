@@ -45,14 +45,14 @@ namespace RabblyApi.Api
 
             if (Env.IsProduction())
             {
-                string dbHost = Environment.GetEnvironmentVariable("DbHost") ?? "";
-                string dbName = Environment.GetEnvironmentVariable("DbName") ?? "";
-                string dbUsername = Environment.GetEnvironmentVariable("DbUsername") ?? "";
-                string dbPassword = Environment.GetEnvironmentVariable("DbPassword") ?? "";
+                string dbHost = Environment.GetEnvironmentVariable("DbHost") ?? "host";
+                string dbName = Environment.GetEnvironmentVariable("DbName") ?? "dbname";
+                string dbUsername = Environment.GetEnvironmentVariable("DbUsername") ?? "username";
+                string dbPassword = Environment.GetEnvironmentVariable("DbPassword") ?? "password";
                 // "Host=database;Database=rabbly;Username=rabbly;Password=password1234"
                 string connectionString = $"Host={dbHost};Database={dbName};Username={dbUsername};Password={dbPassword}";
 
-                Debug.WriteLine(connectionString);
+                Debug.WriteLine(Environment.GetEnvironmentVariable("DbName"));
 
                 services.AddEntityFrameworkNpgsql()
                 .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(connectionString))
