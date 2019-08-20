@@ -14,7 +14,6 @@ using RabblyApi.Debates.Services;
 using RabblyApi.Groups.Services;
 using RabblyApi.Profiles.Services;
 using RabblyApi.Users.Services;
-using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 
@@ -45,10 +44,12 @@ namespace RabblyApi.Api
 
             if (Env.IsProduction())
             {
-                string dbHost = Environment.GetEnvironmentVariable("DbHost") ?? "host";
-                string dbName = Environment.GetEnvironmentVariable("DbName") ?? "dbname";
-                string dbUsername = Environment.GetEnvironmentVariable("DbUsername") ?? "username";
-                string dbPassword = Environment.GetEnvironmentVariable("DbPassword") ?? "password";
+                var secret = AwsSecretsManager.GetSecret();
+                Debug.WriteLine(secret);
+                string dbHost = secret.GetValue("host").ToString();
+                string dbName = secret.GetValue("dbInstanceIdentifier").ToString();
+                string dbUsername = secret.GetValue("username").ToString();
+                string dbPassword = secret.GetValue("password").ToString();
                 // "Host=database;Database=rabbly;Username=rabbly;Password=password1234"
                 string connectionString = $"Host={dbHost};Database={dbName};Username={dbUsername};Password={dbPassword}";
 
