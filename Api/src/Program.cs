@@ -21,7 +21,7 @@ namespace RabblyApi.Api
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                // var context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+                var context = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
                 var env = scope.ServiceProvider.GetService<IHostingEnvironment>();
                 var userService = scope.ServiceProvider.GetService<UserService>();
                 var mapper = scope.ServiceProvider.GetService<IMapper>();
@@ -29,11 +29,11 @@ namespace RabblyApi.Api
                 var debateService = scope.ServiceProvider.GetService<DebateService>();
                 var commentService = scope.ServiceProvider.GetService<CommentService>();
                 var groupService = scope.ServiceProvider.GetService<GroupService>();
-                // context.Database?.Migrate();
-                // if (env.IsDevelopment()) {
-                //     var dataSeeder = new SeedData(context, mapper, userService, profileService, debateService, commentService, groupService);
-                //     dataSeeder.GenerateData().Wait();
-                // }
+                context.Database?.Migrate();
+                if (env.IsDevelopment()) {
+                    var dataSeeder = new SeedData(context, mapper, userService, profileService, debateService, commentService, groupService);
+                    dataSeeder.GenerateData().Wait();
+                }
             }
             host.Run();
         }
