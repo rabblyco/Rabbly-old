@@ -49,11 +49,6 @@ namespace RabblyApi.Api
                 dynamic secretString = JObject.Parse(secretData.GetValue("SecretString").ToString());
                 // "Host=database;Database=rabbly;Username=rabbly;Password=password1234"
                 string connectionString = $"Host={secretString.host};Port={secretString.port};Database={secretString.dbname};Username={secretString.username};Password={secretString.password}";
-                Console.WriteLine("FUCKING FUCK");
-                Debug.WriteLine("FUCKITY DAMN");
-                Console.WriteLine(secretData);
-                Console.WriteLine(secretString);
-                Console.WriteLine(connectionString);
                 
 
                 services.AddEntityFrameworkNpgsql()
@@ -79,7 +74,17 @@ namespace RabblyApi.Api
             })
             .AddJwtBearer(opt =>
             {
-                var tokenSecretKey = Env.IsProduction() ? Environment.GetEnvironmentVariable("TokenSecret") ?? "" : Configuration["Keys:TokenSecret"];
+                string tokenSecretKey;
+                if (Env.IsProduction())
+                {
+                    var tokenSecretData = JObject.Parse(Environment.GetEnvironmentVariable("TokenSecret"));
+                    dynamic tokenSecretString = JObject.Parse(tokenSecretData.GetValue("SecretString").ToString());
+                    tokenSecretKey = tokenSecretString.TokenSecret;
+                }
+                else
+                {
+                   tokenSecretKey = Configuration["Keys:TokenSecret"];
+                }
 
                 opt.TokenValidationParameters = new TokenValidationParameters()
                 {
