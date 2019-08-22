@@ -49,11 +49,16 @@ namespace RabblyApi.Api
                 dynamic secretString = JObject.Parse(secretData.GetValue("SecretString").ToString());
                 // "Host=database;Database=rabbly;Username=rabbly;Password=password1234"
                 string connectionString = $"Host={secretString.host};Port={secretString.port};Database={secretString.dbInstanceIdentifier};Username={secretString.username};Password={secretString.password}";
-                Debug.WriteLine(connectionString);
+                Console.WriteLine("FUCKING FUCK");
+                Debug.WriteLine("FUCKITY DAMN");
+                Console.WriteLine(secretData);
+                Console.WriteLine(secretString);
+                Console.WriteLine(connectionString);
+                
 
-                // services.AddEntityFrameworkNpgsql()
-                // .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(connectionString))
-                // .BuildServiceProvider();
+                services.AddEntityFrameworkNpgsql()
+                .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(connectionString))
+                .BuildServiceProvider();
 
             }
             else
