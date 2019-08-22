@@ -51,9 +51,9 @@ namespace RabblyApi.Api
                 string connectionString = $"Host={secretString.host};Port={secretString.port};Database={secretString.dbInstanceIdentifier};Username={secretString.username};Password={secretString.password}";
                 Debug.WriteLine(connectionString);
 
-                services.AddEntityFrameworkNpgsql()
-                .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(connectionString))
-                .BuildServiceProvider();
+                // services.AddEntityFrameworkNpgsql()
+                // .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(connectionString))
+                // .BuildServiceProvider();
 
             }
             else
