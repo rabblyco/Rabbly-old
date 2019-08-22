@@ -1,5 +1,7 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-alpine AS base
 WORKDIR /app
+ARG DB_CREDS
+ENV DB_CREDS ${DB_CREDS}
 EXPOSE 80
 EXPOSE 443
 
@@ -16,4 +18,5 @@ RUN dotnet publish -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
+RUN echo ${DB_CREDS}
 ENTRYPOINT ["dotnet", "Api.dll"]

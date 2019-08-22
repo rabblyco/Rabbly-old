@@ -44,20 +44,15 @@ namespace RabblyApi.Api
 
             if (Env.IsProduction())
             {
-                var secret = AwsSecretsManager.GetSecret();
-                Debug.WriteLine(secret);
-                string dbHost = secret.GetValue("host").ToString();
-                string dbName = secret.GetValue("dbInstanceIdentifier").ToString();
-                string dbUsername = secret.GetValue("username").ToString();
-                string dbPassword = secret.GetValue("password").ToString();
+                var yeet = Environment.GetEnvironmentVariable("DB_CREDS");
                 // "Host=database;Database=rabbly;Username=rabbly;Password=password1234"
-                string connectionString = $"Host={dbHost};Database={dbName};Username={dbUsername};Password={dbPassword}";
 
-                Debug.WriteLine(Environment.GetEnvironmentVariable("DbName"));
+                Debug.WriteLine(yeet);
+                Console.WriteLine(yeet);
 
-                services.AddEntityFrameworkNpgsql()
-                .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(connectionString))
-                .BuildServiceProvider();
+                // services.AddEntityFrameworkNpgsql()
+                // .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(yeet))
+                // .BuildServiceProvider();
 
             }
             else
