@@ -48,8 +48,8 @@ namespace RabblyApi.Api
                 var secretData = JObject.Parse(Environment.GetEnvironmentVariable("DB_CREDS"));
                 dynamic secretString = JObject.Parse(secretData.GetValue("SecretString").ToString());
                 // "Host=database;Database=rabbly;Username=rabbly;Password=password1234"
-
                 string connectionString = $"Host={secretString.host};Port={secretString.port};Database={secretString.dbInstanceIdentifier};Username={secretString.username};Password={secretString.password}";
+                Debug.WriteLine(connectionString);
 
                 services.AddEntityFrameworkNpgsql()
                 .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(connectionString))
