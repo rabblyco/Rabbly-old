@@ -16,6 +16,7 @@ using RabblyApi.Profiles.Services;
 using RabblyApi.Users.Services;
 using System;
 using System.Diagnostics;
+using Newtonsoft.Json.Linq;
 
 namespace RabblyApi.Api
 {
@@ -44,15 +45,15 @@ namespace RabblyApi.Api
 
             if (Env.IsProduction())
             {
-                var yeet = Environment.GetEnvironmentVariable("DB_CREDS");
+                var secretData = JObject.Parse(Environment.GetEnvironmentVariable("DB_CREDS"));
+                dynamic secretString = JObject.Parse(secretData.GetValue("SecretString").ToString());
                 // "Host=database;Database=rabbly;Username=rabbly;Password=password1234"
 
-                Debug.WriteLine(yeet);
-                Console.WriteLine(yeet);
+                string connectionString = $"Host={secretString.host};Port={secretString.port};Database={secretString.dbInstanceIdentifier};Username={secretString.username};Password={secretString.password}";
 
-                // services.AddEntityFrameworkNpgsql()
-                // .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(yeet))
-                // .BuildServiceProvider();
+                services.AddEntityFrameworkNpgsql()
+                .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(connectionString))
+                .BuildServiceProvider();
 
             }
             else
