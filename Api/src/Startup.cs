@@ -70,21 +70,19 @@ namespace RabblyApi.Api
             })
             .AddJwtBearer(opt =>
             {
-                string tokenSecretKey;
+                string tokenSecret;
                 if (Env.IsProduction())
                 {
-                    var tokenSecretData = JObject.Parse(Environment.GetEnvironmentVariable("TokenSecret"));
-                    dynamic tokenSecretString = JObject.Parse(tokenSecretData.GetValue("SecretString").ToString());
-                    tokenSecretKey = tokenSecretString.TokenSecret;
+                    tokenSecret = Environment.GetEnvironmentVariable("TOKEN_SECRET");
                 }
                 else
                 {
-                   tokenSecretKey = Configuration["Keys:TokenSecret"];
+                   tokenSecret = Configuration["Keys:TokenSecret"];
                 }
 
                 opt.TokenValidationParameters = new TokenValidationParameters()
                 {
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSecretKey)),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSecret)),
                     RequireSignedTokens = false,
                     ValidIssuers = new string[] {
                         Configuration["Credentials:Issuer"],
