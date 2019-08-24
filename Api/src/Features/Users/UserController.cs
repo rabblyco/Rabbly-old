@@ -127,7 +127,7 @@ namespace RabblyApi.Controllers
                 new Claim("sub", user.Id)
             };
 
-            var tokenSecretKey = _env.IsProduction() ? Environment.GetEnvironmentVariable("TokenSecret") ?? "" : _config["Keys:TokenSecret"];
+            var tokenSecretKey = _env.IsProduction() ? Environment.GetEnvironmentVariable("TOKEN_SECRET") : _config["Keys:TokenSecret"];
 
             var tokenSecret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSecretKey));
             // create some credentials and specify the encoding algorithm
