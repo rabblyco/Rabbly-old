@@ -45,7 +45,7 @@ namespace RabblyApi.Api
 
             if (Env.IsProduction())
             {   
-                var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+                var connectionString = Environment.GetEnvironmentVariable("POSTGRESQLCONNSTR_DB_CONNECTION_STRING");
                 Console.WriteLine(connectionString);
                 services.AddEntityFrameworkNpgsql()
                 .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(connectionString))
