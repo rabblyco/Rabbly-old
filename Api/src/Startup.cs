@@ -17,6 +17,7 @@ using RabblyApi.Users.Services;
 using System;
 using System.Diagnostics;
 using Newtonsoft.Json.Linq;
+using Npgsql;
 
 namespace RabblyApi.Api
 {
@@ -43,21 +44,22 @@ namespace RabblyApi.Api
             services.AddScoped<CommentService>();
             services.AddScoped<GroupService>();
 
-            if (Env.IsProduction())
-            {   
+            // if (Env.IsProduction())
+            // {   
                 var connectionString = Environment.GetEnvironmentVariable("POSTGRESQLCONNSTR_DB_CONNECTION_STRING");
-                Console.WriteLine(connectionString);
                 services.AddEntityFrameworkNpgsql()
-                .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(connectionString))
+                .AddDbContext<DatabaseContext>(opt => {
+                    opt.UseNpgsql(connectionString);
+                })
                 .BuildServiceProvider();
 
-            }
-            else
-            {
-                services.AddEntityFrameworkNpgsql()
-                    .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("Default")))
-                    .BuildServiceProvider();
-            }
+            // }
+            // else
+            // {
+            //     services.AddEntityFrameworkNpgsql()
+            //         .AddDbContext<DatabaseContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("Default")))
+            //         .BuildServiceProvider();
+            // }
 
             services.AddAutoMapper();
 
