@@ -3,7 +3,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- master
+- release
 
 resources:
 - repo: self
@@ -24,6 +24,6 @@ stages:
       displayName: Build an image
       inputs:
         command: build
-        dockerfile: 'Api/src/Dockerfile'
+        dockerfile: 'Client/Dockerfile'
         tags: |
           $(tag)
